@@ -8,13 +8,6 @@ class Categories(models.Model):
 	def __unicode__(self):
 		return unicode(self.title)
 
-	'''
-	Use this to generate your views
-	'''
-	# def get_absolute_url(self):
-		# from django.core.urlresolvers import reverse
-		# return reverse('portfolio.views.category', args=[str(self.title)])
-
 	class Meta:
 		verbose_name_plural = 'categories'
 

@@ -5,7 +5,7 @@ class Categories(models.Model):
 	content		= models.TextField(blank=True)
 
 	def __unicode__(self):
-		return self.title
+		return unicode(self.title)
 
 	'''
 	Use this to generate your views
@@ -40,7 +40,7 @@ class Images(BaseMedia):
 		verbose_name_plural = 'images'
 	
 	def __unicode__(self):
-		return self.category
+		return unicode(self.title)
 
 class Videos(BaseMedia):
 	PROVIDER_LIST_CHOICES	= (('YU','YouTube'),('VI','Vimeo'))
@@ -51,5 +51,5 @@ class Videos(BaseMedia):
 		verbose_name_plural = 'videos'
 
 	def __unicode__(self):
-		return self.category
+		return unicode(self.title)
 

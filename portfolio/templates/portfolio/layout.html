@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<title>Francis Mitra</title>
+	</head>
+	<body>
+
+		{% block content %}
+		{% endblock %}
+		
+		<nav>
+			{% for menu_items in menu %}
+				{{menu_items.title}}
+			{% endfor %}
+		</nav>
+
+	</body>
+</html>

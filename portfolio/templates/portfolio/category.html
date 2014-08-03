@@ -1,0 +1,15 @@
+{% extends "portfolio/layout.html" %}
+{% block content %}
+
+{% if portfolio %}
+
+	{% for pic in portfolio %}
+		<h1>{{ pic.title }}</h1>
+		<img src="{{ pic.photo.url }}">
+	{% endfor %}
+
+{% else %}
+	<p>{{ categories.id }}</p>
+{% endif %}
+
+{% endblock %}

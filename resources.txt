@@ -1,0 +1,3 @@
+pip install MySQLdb
+
+pip install Pillow

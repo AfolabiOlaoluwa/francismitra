@@ -2,7 +2,8 @@ from django.db import models
 
 class Categories(models.Model):
 	title		= models.CharField(max_length=250)
-	content		= models.TextField(blank=True)
+	content		= models.TextField(blank=True, null=True)
+	slug		= models.SlugField()
 
 	def __unicode__(self):
 		return unicode(self.title)
@@ -27,8 +28,8 @@ class Categories(models.Model):
 class BaseMedia(models.Model):
 	category 	= models.ForeignKey(Categories)
 	title   	= models.CharField(max_length=250)
-	caption		= models.CharField(max_length=250)
-	date 		= models.DateTimeField('date published')
+	caption		= models.CharField(max_length=250, blank=True, null=True)
+	year 		= models.CharField(max_length=4, blank=True, null=True)
 
 	class Meta:
 		abstract = True

@@ -13,9 +13,11 @@
 		{% endblock %}
 		
 		<nav>
+			<ul>
 			{% for menu_items in menu %}
-				{{menu_items.title}}
+				<li><a href="{% url 'portfolio:categories' menu_items.slug %}">{{menu_items.title}}</a></li>
 			{% endfor %}
+			</ul>
 		</nav>
 
 	</body>

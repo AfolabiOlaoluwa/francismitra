@@ -2,7 +2,6 @@
 {% block content %}
 
 {% if portfolio %}
-	<span>something here and {{test.id}}</span>
 	{% for pic in portfolio %}
 		<h1>{{ pic.title }}</h1>
 		<img src="{{ pic.photo.url }}">

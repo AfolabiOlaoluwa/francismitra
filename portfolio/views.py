@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from portfolio.models import Images, Categories, Videos
 
+# Mixin to create menu
 class LayoutView(object):
 	template_name = 'portfolio/layout.html'
 

@@ -1,7 +1,107 @@
-@gray: #444;
+/*
+=================================================
+DEFAULTS, MIXINS, VARIABLES
+================================================*/
 @white: #fff;
+@black: #000;
+@darkgray: #373737;
+@lightgray: #878787;
+
+@font-base: 13px arial, sans-serif;
+
+@large-font: 18px;
+@medium-font: 15px;
+@small-font: 11px;
+
+.basepadding (@padding: 20px) {
+	padding: @padding;
+}
+
+.boxshadow (@shadow: 0 -15px 20px -21px @black) {
+	box-shadow: @shadow;
+		-webkit-box-shadow: @shadow;
+			-moz-box-shadow: @shadow;
+}
+
+@smalldesktop: ~"screen and (max-width:900px)";
+@phone: ~"screen and (max-width:780px)";
 
 body {
+	font: @font-base; 
 	background-color: @white;
+	color: @black;
+	font-weight: 100;
 	margin: 0 auto;
 }
+* {
+	box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+}
+.cf:before,
+.cf:after {
+    content: " "; 
+    display: table; 
+}
+.cf:after {
+    clear: both;
+}
+h1 { font-size: 30px; }
+h2 { font-size: 25px; }
+h3 { font-size: 20px; }
+a:link, a:visited, a:active {
+	color: @lightgray;
+	text-decoration: none;
+}
+a:hover {
+	color: @darkgray;
+	text-decoration: none;
+}
+.text-justify { text-align: justify; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+.uppercase { text-transform: uppercase; }
+.right {
+	float: right;
+}
+.left {
+	float: left;
+}
+
+/*
+=================================================
+BLOCK ELEMENTS
+================================================*/
+.outercontainer {
+	display: table;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+.innercontainer {
+	display: table-cell;
+	vertical-align: middle;
+}
+.row {
+	width: 100%;
+	display: block;
+	position: relative;
+}
+.half {
+	width: 50%;
+	padding: 0 2%;
+	float: left;
+	@media @phone {
+		width: 100%;
+		float: none;
+		padding: 0;
+	}
+}
+.thirds {
+	width: 33.3%;
+	padding: 0 2%;
+	float: left;
+}
+
+

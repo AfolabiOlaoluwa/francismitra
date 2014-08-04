@@ -23,7 +23,7 @@ SECRET_KEY = '5zitr&8^udt!@yd+@lw*$!t8_i)**nhy%80b_7zu%6t$151s%z'
 DEBUG = True
 
 # Defaults to false when DEBUG = True
-COMPRESS_ENABLED = True
+# COMPRESS_ENABLED = True
 
 TEMPLATE_DEBUG = True
 

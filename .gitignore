@@ -3,7 +3,7 @@
 *.pyc
 .webassets-cache
 venv/
-media/images/
+media/
 static/CACHE
 
 # OS generated files

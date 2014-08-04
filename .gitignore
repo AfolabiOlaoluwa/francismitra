@@ -4,6 +4,7 @@
 .webassets-cache
 venv/
 media/images/
+static/CACHE
 
 # OS generated files
 ######################

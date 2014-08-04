@@ -22,6 +22,9 @@ SECRET_KEY = '5zitr&8^udt!@yd+@lw*$!t8_i)**nhy%80b_7zu%6t$151s%z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Defaults to false when DEBUG = True
+COMPRESS_ENABLED = True
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -36,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
     'portfolio'
 )
 
@@ -82,11 +86,22 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+
 STATIC_URL = '/static/'
+COMPRESS_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Portfolio uploads
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -6,6 +6,12 @@
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 		<title>Francis Mitra</title>
+
+		{% load compress %}
+		{% compress css %}
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/styles.less" type="text/less">
+		{% endcompress %}
+
 	</head>
 	<body>
 

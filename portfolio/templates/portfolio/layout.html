@@ -12,19 +12,33 @@
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/styles.less" type="text/less">
 		{% endcompress %}
 
+		{% load compress %}
+		{% compress js %}
+		<script src="{{ STATIC_URL }}js/jquery.min.1.11.1.js"></script>
+		<script src="{{ STATIC_URL }}js/snap.svg-min.js"></script>
+		<script src="{{ STATIC_URL }}js/scripts.js"></script>
+		{% endcompress %}
+
 	</head>
 	<body>
 
-		{% block content %}
-		{% endblock %}
-		
+		<div class="wrapper">
+
 		<nav>
+			<div>
+				<span class="menu-toggle" data-icon-name="hamburgerCross"></span>
+			</div>
 			<ul>
 			{% for menu_items in menu %}
 				<li><a href="{% url 'portfolio:categories' menu_items.slug %}">{{menu_items.title}}</a></li>
 			{% endfor %}
 			</ul>
 		</nav>
+
+		{% block content %}
+		{% endblock %}
+
+		</div> <!-- .wrapper -->
 
 	</body>
 </html>

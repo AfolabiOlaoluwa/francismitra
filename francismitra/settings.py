@@ -93,6 +93,17 @@ COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
 
+COMPRESS_CSS_FILTERS = [
+    #creates absolute urls from relative ones
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    #css minimizer
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter'
+]
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',

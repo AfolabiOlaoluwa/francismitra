@@ -191,13 +191,8 @@ $(document).ready(function() {
 				size		: { w : 35, h : 35 },
 				onToggle	: function() {
 
-					var $menu_items = $('nav > ul > li');
-
-					$('nav > ul').slideToggle(function() {
-						$menu_items.animateVisibility();
-					});
-
-					$('body').moveBody();
+					$('nav').animateMenu();
+					$('.nav-push').animateMenu();
 
 				}
 			} );
@@ -207,27 +202,15 @@ $(document).ready(function() {
 	/*
 	 *
 	 * Animations for mobile menu
-	 * (1) Reduce opacity instead of hide/unhide in order to maintain parent height
-	 * (2) Push body down to stimiluate menu push (necessary if nav.css position = fixed)
-	 *		- transition is handled in stylesheet
-	 * 
+	 * Edit this to run a function on completion -- fade menu in and out
+ 	 * 
 	 */
-	$.fn.animateVisibility = function() {
-		var opacity = this.css('opacity');
-		if(opacity == 0.0) {
-			this.animate({opacity:1.0},600);
+	$.fn.animateMenu = function() {
+		var height = this.css('height');
+		if(height == '50px') {
+			this.animate({'height':'250px'}, 600);
 		} else {
-			this.css({opacity:0.0});
-		}
-	};
-
-	$.fn.moveBody = function() {
-		var margin = this.css('margin-top');
-
-		if(margin == '0px') {
-			this.css({'margin-top':'170px'});
-		} else {
-			this.css({'margin-top':0});
+			this.animate({'height':'50px'}, 600);
 		}
 	}
 

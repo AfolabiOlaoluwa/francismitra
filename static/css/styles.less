@@ -43,9 +43,6 @@ body {
 	color: @black;
 	font-weight: 100;
 	margin: 0 auto;
-	@media @medium-screen {
-		.transition;
-	}
 }
 * {
 	box-sizing: border-box;
@@ -206,11 +203,14 @@ nav {
 		position: fixed;
 		top: 0;
 		left: 0;
+		// testing...
+		height: 50px;
+		overflow: hidden;
 	}
 	> ul {
 		list-style: none;
 		padding: 0;
-		margin: 0;
+		// margin: 0;
 		text-transform: uppercase;
 		font-size: @xlarge-font;
 		@media @medium-screen {
@@ -232,7 +232,7 @@ nav {
 				a, a:visited, a:active {
 					color: @white;
 				} 
-				opacity: 0.0;
+				// opacity: 0.0;
 			}
 		}
 	}
@@ -244,7 +244,7 @@ nav {
 
 .nav-push {
 	width: 100%;
-	height: 40px;
+	height: 50px;
 	display: none;
 }
 

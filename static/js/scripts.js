@@ -192,10 +192,12 @@ $(document).ready(function() {
 				onToggle	: function() {
 
 					var $menu_items = $('nav > ul > li');
-					// console.log('toggle activated');
+
 					$('nav > ul').slideToggle(function() {
 						$menu_items.animateVisibility();
 					});
+
+					$('body').moveBody();
 
 				}
 			} );
@@ -204,7 +206,10 @@ $(document).ready(function() {
 
 	/*
 	 *
-	 * Animate menu visibility (element needs to remain on page in order for parent to maintain height)
+	 * Animations for mobile menu
+	 * (1) Reduce opacity instead of hide/unhide in order to maintain parent height
+	 * (2) Push body down to stimiluate menu push (necessary if nav.css position = fixed)
+	 *		- transition is handled in stylesheet
 	 * 
 	 */
 	$.fn.animateVisibility = function() {
@@ -215,5 +220,15 @@ $(document).ready(function() {
 			this.css({opacity:0.0});
 		}
 	};
+
+	$.fn.moveBody = function() {
+		var margin = this.css('margin-top');
+
+		if(margin == '0px') {
+			this.css({'margin-top':'170px'});
+		} else {
+			this.css({'margin-top':0});
+		}
+	}
 
 });

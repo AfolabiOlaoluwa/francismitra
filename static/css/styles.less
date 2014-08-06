@@ -27,6 +27,12 @@ DEFAULTS, MIXINS, VARIABLES
 			-moz-box-shadow: @shadow;
 }
 
+.transition (@transition: all 0.6s ease) {
+	transition: @transition;
+		-webkit-transition: @transition;
+			-moz-transition: @transition;
+}
+
 @large-screen: ~"screen and (max-width:900px)";
 @medium-screen: ~"screen and (max-width:768px)";
 @small-screen: ~"screen and (max-width:450px)";
@@ -37,6 +43,9 @@ body {
 	color: @black;
 	font-weight: 100;
 	margin: 0 auto;
+	@media @medium-screen {
+		.transition;
+	}
 }
 * {
 	box-sizing: border-box;
@@ -181,14 +190,21 @@ nav {
 	background-color: @black;
 	padding: 5px 10px;
 	> div {
+		display: none;
 		height: 40px;
 		line-height: 40px;
+		@media @medium-screen {
+			display: block;
+		}
 		svg {
 			vertical-align: middle;
 		}
 	}
-	// height: 100px;
-	// line-height: 100px;
+	@media @medium-screen {
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
 	> ul {
 		list-style: none;
 		padding: 0;
@@ -225,7 +241,17 @@ nav {
 	cursor: pointer;
 }
 
+.nav-push {
+	width: 100%;
+	height: 40px;
+	display: none;
+}
 
+@media @medium-screen {
+	.nav-push {
+		display: block;
+	}
+}
 
 
 

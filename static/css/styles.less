@@ -186,9 +186,7 @@ BLOCK ELEMENTS
 NAVIGATION
 ================================================*/
 nav {
-	width: 100%;
-	background-color: @black;
-	padding: 5px 10px;
+	// desktop styles for nav...
 	> div {
 		display: none;
 		height: 40px;
@@ -201,6 +199,9 @@ nav {
 		}
 	}
 	@media @medium-screen {
+		width: 100%;
+		background-color: @black;
+		padding: 5px 10px;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -223,14 +224,13 @@ nav {
 		li {
 			margin: 0 0 10px 0;
 			padding: 0;
-			a, a:visited, a:active {
-				color: @white;
-			} 
 			&:last-child {
 				margin-bottom: 0;
 			}
 			@media @medium-screen {
-				// Used for menu animation
+				a, a:visited, a:active {
+					color: @white;
+				} 
 				opacity: 0.0;
 			}
 		}

@@ -215,7 +215,7 @@ $(document).ready(function() {
 	$.fn.animateVisibility = function() {
 		var opacity = this.css('opacity');
 		if(opacity == 0.0) {
-			this.animate({opacity:1.0},700);
+			this.animate({opacity:1.0},600);
 		} else {
 			this.css({opacity:0.0});
 		}

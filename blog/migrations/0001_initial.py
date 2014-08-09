@@ -18,13 +18,30 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'blog', ['Posts'])
 
+        # Adding model 'PostImages'
+        db.create_table(u'blog_postimages', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('post', self.gf('django.db.models.fields.related.ForeignKey')(related_name='images', to=orm['blog.Posts'])),
+            ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+        ))
+        db.send_create_signal(u'blog', ['PostImages'])
+
 
     def backwards(self, orm):
         # Deleting model 'Posts'
         db.delete_table(u'blog_posts')
 
+        # Deleting model 'PostImages'
+        db.delete_table(u'blog_postimages')
+
 
     models = {
+        u'blog.postimages': {
+            'Meta': {'object_name': 'PostImages'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'post': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'images'", 'to': u"orm['blog.Posts']"})
+        },
         u'blog.posts': {
             'Meta': {'object_name': 'Posts'},
             'content': ('django.db.models.fields.TextField', [], {}),

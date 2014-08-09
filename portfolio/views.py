@@ -13,7 +13,6 @@ class LayoutView(object):
 		context['menu'] = Categories.objects.all()
 		return context
 
-
 class IndexView(LayoutView, generic.TemplateView):
 	template_name = 'portfolio/index.html'
 
@@ -35,6 +34,7 @@ class CategoryView(LayoutView, generic.DetailView):
 		context = super(CategoryView, self).get_context_data(**kwargs)
 		# See Bernard's tutorial... can you set this up as a method of the category?
 		# self.get_object().category_images
+		# check if category is empty and sort the list before adding it to portfolio
 		context['portfolio'] = Images.objects.filter(category_id=self.category)
 		return context
 

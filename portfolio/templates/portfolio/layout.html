@@ -39,11 +39,14 @@
 				<li><a href="{% url 'blog:blog_home' %}">Blog</a></li>
 			</ul>
 
+			{% if aside %}
 			<ul class="aside">
 			{% for aside_items in aside %}
 				<li>{{aside_items}}</li>
 			{% endfor %}
 			</ul>
+			{% endif %}
+			
 		</nav>
 
 		<div class="nav-push"></div>

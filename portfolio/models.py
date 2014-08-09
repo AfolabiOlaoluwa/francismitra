@@ -28,6 +28,7 @@ class BaseMedia(models.Model):
 		abstract = True
 
 class Images(BaseMedia):
+	photo = models.ImageField(upload_to='portfolio/')
 	photo = models.ImageField(upload_to='images/')
 
 	class Meta:

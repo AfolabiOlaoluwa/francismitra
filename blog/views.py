@@ -11,7 +11,6 @@ class BlogView(LayoutView, generic.ListView):
 class SingleView(LayoutView, generic.DetailView):
 	template_name = 'blog/single.html'
 	model = Posts
-	# context_object_name = 'post'
 
 class TutorialView(LayoutView, generic.TemplateView):
 	template_name = 'blog/tutorials.html'

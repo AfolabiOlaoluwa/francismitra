@@ -109,7 +109,7 @@ BLOCK ELEMENTS
 	width: 100%;
 	margin: @top-position auto 0 auto;
 	max-width: @max-width;
-	// border: 1px solid @black;
+	border: 1px solid @gray;
 	@media @medium-screen {
 		margin: 0 auto;
 		max-width: 768px;
@@ -155,7 +155,7 @@ BLOCK ELEMENTS
 NAVIGATION
 ================================================*/
 nav {
-	z-index: 5;
+	z-index: 1;
 	position: fixed;
 	width: 100%;
 	max-width: @max-width;
@@ -246,15 +246,14 @@ nav {
 =================================================
 PORTFOLIO
 ================================================*/
-// .page {
-// 	.portfolio {
-// 		width: 80%;
-// 		@media @medium-screen {
-// 			width: 100%;
-// 		}
-// 		// max-width: 800px;
-// 	}
-// }
+.page {
+	width: 80%;
+	.basepadding;
+	@media @medium-screen {
+		width: 100%;
+	}
+}
+
 .portfolio {
 	white-space: nowrap;
 	position: absolute;

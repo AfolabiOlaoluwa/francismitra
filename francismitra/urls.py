@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # url(r'^$', 'francismitra.views.home', name='home'),
+    url(r'^blog/', include('blog.urls', namespace='blog')),
     url(r'^portfolio/', include('portfolio.urls', namespace='portfolio')),
     # url(r'^$', include('portfolio.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),

@@ -5,6 +5,7 @@
 venv/
 media/
 static/CACHE
+migrations/
 
 # OS generated files
 ######################

@@ -35,8 +35,8 @@
 				<li><a href="{% url 'portfolio:categories' menu_items.slug %}">{{menu_items.title}}</a></li>
 			{% endfor %}
 				<li><a href="#">Info</a></li>
-				<li><a href="#">Tutorials</a></li>
-				<li><a href="#">Blog</a></li>
+				<li><a href="{% url 'blog:tutorials' %}">Tutorials</a></li>
+				<li><a href="{% url 'blog:blog' %}">Blog</a></li>
 			</ul>
 
 			<ul class="aside">

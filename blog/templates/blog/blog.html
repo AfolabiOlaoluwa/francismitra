@@ -1,0 +1,10 @@
+{% extends "portfolio/layout.html" %}
+{% block content %}
+
+<span>Blog page</span>
+
+{% for posts in all_posts %}
+<a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a>
+{% endfor %}
+
+{% endblock %}

@@ -14,8 +14,10 @@
 
 		{% load compress %}
 		{% compress js %}
-		<script src="{{ STATIC_URL }}js/jquery.min.1.11.1.js"></script>
-		<script src="{{ STATIC_URL }}js/snap.svg-min.js"></script>
+		<script src="{{ STATIC_URL }}js/libs/jquery.min.1.11.1.js"></script>
+		<script src="{{ STATIC_URL }}js/libs/jquery.mousewheel.min.js"></script>
+		<script src="{{ STATIC_URL }}js/libs/snap.svg-min.js"></script>
+		<script src="{{ STATIC_URL }}js/libs/svg-animation.js"></script>
 		<script src="{{ STATIC_URL }}js/scripts.js"></script>
 		{% endcompress %}
 
@@ -28,9 +30,18 @@
 			<div>
 				<span class="menu-toggle" data-icon-name="hamburgerCross"></span>
 			</div>
-			<ul>
+			<ul class="menu">
 			{% for menu_items in menu %}
 				<li><a href="{% url 'portfolio:categories' menu_items.slug %}">{{menu_items.title}}</a></li>
+			{% endfor %}
+				<li><a href="#">Info</a></li>
+				<li><a href="#">Tutorials</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+
+			<ul class="aside">
+			{% for aside_items in aside %}
+				<li>{{aside_items}}</li>
 			{% endfor %}
 			</ul>
 		</nav>

@@ -1,11 +1,13 @@
 {% extends "portfolio/layout.html" %}
 {% block content %}
 
+<section class="portfolio">
 {% if portfolio %}
 	{% for pic in portfolio %}
-		<h1>{{ pic.title }}</h1>
-		<img src="{{ pic.photo.url }}">
+		<!-- <h1>{{ pic.title }}</h1> -->
+		<img src="{{ pic.photo.url }}" alt="">
 	{% endfor %}
 {% endif %}
+</section>
 
 {% endblock %}

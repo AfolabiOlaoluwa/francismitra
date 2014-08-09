@@ -5,7 +5,6 @@ DEFAULTS, MIXINS, VARIABLES
 @white: #fff;
 @black: #000;
 @gray: #373737;
-@light-gray: lighten(@gray, 30%);
 
 @font-base: 13px arial, sans-serif;
 
@@ -14,9 +13,11 @@ DEFAULTS, MIXINS, VARIABLES
 @medium-font: 15px;
 @small-font: 11px;
 
-// DESIGN THE MOBILE VERSION OF YOUR WEBSITE FIRST!!
-// BS is more necessary than your BP style as it requires vendor prefixes
-// Set one up for opacity + placeholder
+// Positioning
+@max-width: 1200px;
+@portfolio-height: 550px;
+@top-position: 70px;
+
 .basepadding (@padding: 20px) {
 	padding: @padding;
 }
@@ -49,20 +50,18 @@ body {
 		-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 }
-.cf:before,
-.cf:after {
-    content: " "; 
-    display: table; 
-}
-.cf:after {
-    clear: both;
-}
-/*
-*
-* How you should handle your clearfixes
-*
-// Mixin
-.clearfix() {
+// .cf:before,
+// .cf:after {
+//     content: " "; 
+//     display: table; 
+// }
+// .cf:after {
+//     clear: both;
+// }
+
+// does this work?
+* { 
+// .clearfix() {
   &:before,
   &:after {
     content: " ";
@@ -73,17 +72,17 @@ body {
   }
 }
 
-// Usage
-.container {
-  .clearfix();
+.placeholder(@color: @gray) {
+	&::-moz-placeholder           { color: @color; } 
+	&:-ms-input-placeholder       { color: @color; } 
+	&::-webkit-input-placeholder  { color: @color; } 
 }
-*
-*/
+
 h1 { font-size: 30px; }
 h2 { font-size: 25px; }
 h3 { font-size: 20px; }
 a, a:visited, a:active {
-	color: @light-gray;
+	color: lighten(@gray, 30%);
 	text-decoration: none;
 }
 a:hover {
@@ -108,10 +107,16 @@ BLOCK ELEMENTS
 ================================================*/
 .wrapper {
 	width: 100%;
-	max-width: 768px;
-	margin: 0 auto;
-	img {
-		max-width: 100%;
+	margin: @top-position auto 0 auto;
+	max-width: @max-width;
+	// border: 1px solid @black;
+	@media @medium-screen {
+		margin: 0 auto;
+		max-width: 768px;
+		img {
+			max-width: 100%;
+			width: 100%;
+		}
 	}
 }
 .outercontainer {
@@ -129,39 +134,6 @@ BLOCK ELEMENTS
 	display: block;
 	position: relative;
 }
-/* 
-*
-* You should rebuild your grid using BS influenced columns
-* and mobile helper styles (hide at xs only, etc)
-* Split outer/inner containers into definite centering blocks (use as a mixin with rows)
-* Use color schemes
-@gray-darker:  lighten(#000, 13.5%); // #222
-@gray-dark:    lighten(#000, 20%);   // #333
-@link-color:       @brand-primary;
-@link-hover-color: darken(@link-color, 15%);
-@font-size-base:          14px;
-@font-size-large:         ceil((@font-size-base * 1.25)); // ~18px
-@font-size-small:         ceil((@font-size-base * 0.85)); // ~12px
-@font-size-h1:            floor((@font-size-base * 2.6)); // ~36px
-@padding-base-vertical:          6px;
-@padding-base-horizontal:        12px;
-* Start using RGBA for colors
-*
-*
-.opacity(@opacity) {
-  opacity: @opacity;
-  // IE8 filter
-  @opacity-ie: (@opacity * 100);
-  filter: ~"alpha(opacity=@{opacity-ie})";
-}
-.placeholder(@color: @input-color-placeholder) {
-  &::-moz-placeholder           { color: @color; } // Firefox
-  &:-ms-input-placeholder       { color: @color; } // Internet Explorer 10+
-  &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
-}
-*
-*
-*/
 .half {
 	width: 50%;
 	padding: 0 2%;
@@ -183,11 +155,18 @@ BLOCK ELEMENTS
 NAVIGATION
 ================================================*/
 nav {
-	// desktop styles for nav...
+	z-index: 5;
+	position: fixed;
+	width: 100%;
+	max-width: @max-width;
+	height: @portfolio-height;
 	> div {
 		display: none;
-		height: 40px;
-		line-height: 40px;
+		height: 50px;
+		line-height: 50px;
+		background-color: rgba(0,0,0,.80);
+		border-bottom: 1px solid lighten(@black, 20%);
+		padding: 0 10px;
 		@media @medium-screen {
 			display: block;
 		}
@@ -197,33 +176,23 @@ nav {
 	}
 	@media @medium-screen {
 		width: 100%;
-		// background-color: @black;
-		background-color: rgba(0,0,0,.95);
-		padding: 5px 10px;
-		position: fixed;
+		border-bottom: 1px solid lighten(@black, 20%);
+		background-color: rgba(0,0,0,.75);
 		top: 0;
 		left: 0;
-		// testing...
 		height: 50px;
 		overflow: hidden;
 	}
-	> ul {
+	> ul.aside, ul.menu {
 		list-style: none;
-		padding: 0;
-		// margin: 0;
-		text-transform: uppercase;
+		height: 100%;
+		width: 170px;
+		float: right;
 		font-size: @xlarge-font;
-		@media @medium-screen {
-			display: none;
-			// height: 0;
-			// overflow: hidden;
-			text-align: center;
-			width: 100%;
-			font-size: @large-font;
-			padding: 0 0 20px 0;
-		}
+		padding: 0 7px;
 		li {
-			margin: 0 0 10px 0;
+			margin: 0 0 15px 0;
+			color: lighten(@gray, 50%);
 			padding: 0;
 			&:last-child {
 				margin-bottom: 0;
@@ -232,8 +201,29 @@ nav {
 				a, a:visited, a:active {
 					color: @white;
 				} 
-				// opacity: 0.0;
 			}
+		}
+	}
+	> ul.aside {
+		margin: 0;
+		text-align: right;
+		text-transform: lowercase;
+		@media @medium-screen {
+			display: none;
+		}
+	}
+	> ul.menu {
+		background-color: rgba(255,255,255,.70);
+		margin: 0 20px 0 0;
+		text-transform: uppercase;
+		@media @medium-screen {
+			float: none;
+			background-color: transparent;
+			text-align: center;
+			width: 100%;
+			font-size: @large-font;
+			margin: 0;
+			padding: 40px 0;
 		}
 	}
 }
@@ -242,17 +232,51 @@ nav {
 	cursor: pointer;
 }
 
+// Animate the the body when fixed menu expands
 .nav-push {
 	width: 100%;
 	height: 50px;
 	display: none;
-}
-
-@media @medium-screen {
-	.nav-push {
+	@media @medium-screen {
 		display: block;
 	}
 }
 
+/*
+=================================================
+PORTFOLIO
+================================================*/
+// .page {
+// 	.portfolio {
+// 		width: 80%;
+// 		@media @medium-screen {
+// 			width: 100%;
+// 		}
+// 		// max-width: 800px;
+// 	}
+// }
+.portfolio {
+	white-space: nowrap;
+	position: absolute;
+	top: @top-position;
+	left: 0;
+	padding-right: 300px;
+	height: @portfolio-height;
+	img {
+		height: 100%;
+		margin-right: 15px;
+	}
+	@media @medium-screen {
+		top: 0;
+		position: relative;
+		padding: 0;
+		height: auto;
+		white-space: normal;
+		width: 100%;
+		img {
+			margin-right: 0;
+		}
+	}
+}
 
 

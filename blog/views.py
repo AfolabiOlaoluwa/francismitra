@@ -6,7 +6,12 @@ from portfolio.views import LayoutView
 class BlogView(LayoutView, generic.ListView):
 	template_name = 'blog/blog.html'
 	model = Posts
-	context_object_name = 'all_posts'
+
+	def get_context_data(self, **kwargs):
+		context = super(BlogView, self).get_context_data(**kwargs)
+
+		context['blog_posts'] = Posts.objects.exclude(category='TU')
+		return context
 
 class SingleView(LayoutView, generic.DetailView):
 	template_name = 'blog/single.html'
@@ -18,5 +23,12 @@ class SingleView(LayoutView, generic.DetailView):
 		context['images'] = PostImages.objects.filter(post_id=self.object)
 		return context
 
-class TutorialView(LayoutView, generic.TemplateView):
+class TutorialView(LayoutView, generic.ListView):
 	template_name = 'blog/tutorials.html'
+	model = Posts
+
+	def get_context_data(self, **kwargs):
+		context = super(TutorialView, self).get_context_data(**kwargs)
+
+		context['tutorial_posts'] = Posts.objects.exclude(category='DE')
+		return context

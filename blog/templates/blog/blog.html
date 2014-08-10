@@ -2,8 +2,8 @@
 {% block content %}
 
 <section class="page">
-	{% for posts in all_posts %}
-	
+	{% for posts in blog_posts %}
+
 	<a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a><br>
 	{% for images in posts.get_images %}
 	<img src="{{ images.photo.url }}" alt="">

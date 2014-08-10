@@ -29,7 +29,7 @@ class BaseMedia(models.Model):
 
 class Images(BaseMedia):
 	photo = models.ImageField(upload_to='portfolio/')
-	photo = models.ImageField(upload_to='images/')
+	# photo = models.ImageField(upload_to='images/')
 
 	class Meta:
 		verbose_name_plural = 'images'

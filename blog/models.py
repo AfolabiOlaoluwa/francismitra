@@ -13,8 +13,12 @@ class Posts(models.Model):
 	class Meta:
 		verbose_name_plural = 'posts'
 
+	def get_images(self):
+		return self.postimages_set.select_related('post')
+
+
 class PostImages(models.Model):
-	post  = models.ForeignKey(Posts, related_name='images')
+	post  = models.ForeignKey(Posts)
 	photo = models.ImageField(upload_to='blog/')
 
 	def __unicode__(self):

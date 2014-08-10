@@ -1,6 +1,12 @@
 {% extends "portfolio/layout.html" %}
 {% block content %}
 
-{{posts.title}}
+<section class="page">
+	{{posts.title}}
+	<br><br>
+	{% for image in images %}
+	<img src="{{ image.photo.url }}" alt="">
+	{% endfor %}
+</section>
 
 {% endblock %}

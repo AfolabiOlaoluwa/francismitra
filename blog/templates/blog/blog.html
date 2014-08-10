@@ -2,10 +2,13 @@
 {% block content %}
 
 <section class="page">
-	<span>Blog page</span>
-
 	{% for posts in all_posts %}
-	<a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a>
+	
+	<a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a><br>
+	{% for images in posts.get_images %}
+	<img src="{{ images.photo.url }}" alt="">
+	{% endfor %}
+
 	{% endfor %}
 </section>
 

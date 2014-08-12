@@ -1,7 +1,0 @@
-pip install MySQLdb
-
-pip install Pillow
-
-pip install django_compressor
-
-pip install South

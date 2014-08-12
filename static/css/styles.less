@@ -254,6 +254,7 @@ nav {
 a.author {
 	float: left;
 	text-transform: uppercase;
+	// font-family: 'ralewaylight', arial, sans-serif;
 	color: #fff;
 	font-size: @medium-font;
 }
@@ -273,8 +274,11 @@ a.author {
 	}
 }
 
+// add space between footer and content for v.scroll
+
 footer {
 	position: fixed;
+	font-family: 'ralewaylight', arial, sans-serif;
 	z-index: 5;
 	bottom: 0;
 	left: 0;
@@ -289,6 +293,7 @@ footer {
 		color: darken(@white, 60%);
 	}
 	@media @medium-screen {
+		display: none; // maybe
 		background-color: @black;
 		color: @white;
 		border-top: 1px solid lighten(@black, 20%);

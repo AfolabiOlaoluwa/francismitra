@@ -37,7 +37,7 @@
 			{% endfor %}
 				<li><a href="#">Info</a></li>
 				<li><a href="{% url 'blog:tutorials' %}">Tutorials</a></li>
-				<li><a href="{% url 'blog:blog_home' %}">Blog</a></li>
+				<li><a href="{% url 'blog:blog_home' %}">Blog <span class="update_date">Updated: {{updated_at.created|date:"M d"}}</span></a></li>
 			</ul>
 
 			{% if aside %}
@@ -55,9 +55,8 @@
 		{% block content %}
 		{% endblock %}
 
-
 		<footer>
-			<a class="left" href="/portfolio">Francis Mitra</a>
+			<span class="left"><a href="/portfolio">Francis Mitra</a> | <a target="_blank" href="https://github.com/fm-qb/francismitra">Source</a></span>
 			<span class="right">&copy 2014</span>
 		</footer>
 		</div> <!-- .wrapper -->

@@ -236,8 +236,12 @@ nav {
 	}
 	> ul.menu {
 		background-color: fadeout(@white, 30%);
-		margin: 0 20px 0 0;
+		margin: 0;
+		// margin: 0 20px 0 0;
 		text-transform: uppercase;
+		@media (max-width:1200px) {
+			margin-right: 20px;
+		}
 		@media @medium-screen {
 			float: none;
 			background-color: transparent;
@@ -254,6 +258,7 @@ nav {
 a.author {
 	float: left;
 	text-transform: uppercase;
+	// font-family: josefin_sansthin;
 	// font-family: 'ralewaylight', arial, sans-serif;
 	color: #fff;
 	font-size: @medium-font;
@@ -274,6 +279,18 @@ a.author {
 	}
 }
 
+.update_date {
+	font-size: @small-font;
+	text-transform: none;
+	color: #ca2953;
+	// color: #9d0cb7;
+	font-family: josefin_sansthin;
+	font-style: italic;
+	@media @medium-screen {
+		display: none;
+	}
+}
+
 // add space between footer and content for v.scroll
 
 footer {
@@ -286,7 +303,8 @@ footer {
 	padding: 0 20px;
 	height: 40px;
 	line-height: 40px;
-	background-color: fadeout(@white, 50%);
+	background-color: @white;
+	// background-color: fadeout(@white, 50%);
 	color: darken(@white, 60%);
 	border-top: 1px solid darken(@white, 10%);
 	a {
@@ -311,7 +329,7 @@ footer {
 PORTFOLIO
 ================================================*/
 .page {
-	width: 83%;
+	width: 85%;
 	padding: 10px 20px;
 	z-index: 2;
 	position: relative;
@@ -320,10 +338,11 @@ PORTFOLIO
 		max-width: 100%;
 	}
 	@media (max-width: 1200px) {
-		width: 80%;
+		margin-left: 20px; // keep centered with pushed nav
+		width: 78%;
 	}
-	@media (max-width: 950px) {
-		width: 77%;
+	@media (max-width: 900px) {
+		width: 75%;
 	}
 	// @media (max-width: 1050px) {
 		// width: 80%;
@@ -333,6 +352,7 @@ PORTFOLIO
 	// }
 	@media @medium-screen {
 		width: 100%;
+		margin-left: 0;
 		.basepadding;
 	}
 }

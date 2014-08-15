@@ -45,7 +45,7 @@ $(document).ready(function() {
 	 */
 	$(function() {
 		$('html, body').mousewheel(function(event, delta) {
-		this.scrollLeft -= (delta * 120);
+		this.scrollLeft -= (delta * 10);
 		// event.preventDefault();
 		});
 	});

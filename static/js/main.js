@@ -25,7 +25,6 @@ $(document).ready(function() {
 	/*
 	 *
 	 * Animations for mobile menu
-	 * Edit this to run a function on completion -- fade menu in and out
 	 * Edit this to fix nav height on return to desktop
  	 * 
 	 */

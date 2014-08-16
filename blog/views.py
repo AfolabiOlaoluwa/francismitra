@@ -17,12 +17,6 @@ class SingleView(LayoutView, generic.DetailView):
 	template_name = 'blog/single.html'
 	model = Posts
 
-	def get_context_data(self, **kwargs):
-		context = super(SingleView, self).get_context_data(**kwargs)
-	
-		context['images'] = PostImages.objects.filter(post_id=self.object)
-		return context
-
 class TutorialView(LayoutView, generic.ListView):
 	template_name = 'blog/tutorials.html'
 	model = Posts

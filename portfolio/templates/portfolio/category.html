@@ -2,16 +2,12 @@
 {% block content %}
 
 <section class="portfolio">
-{% if portfolio %}
-	{% for pic in portfolio %}
-		<img src="{{ pic.photo.url }}" alt="">
-
-		<div class="row">
-			{{pic.year}}
-		</div>
-
-	{% endfor %}
-{% endif %}
+{% for image in categories.get_images %}
+	<img src="{{ image.photo.url }}" alt="">
+	<div class="row">
+		{{image.year}}
+	</div>
+{% endfor %}
 </section>
 
 {% endblock %}

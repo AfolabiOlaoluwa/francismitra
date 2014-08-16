@@ -28,18 +28,6 @@ class CategoryView(LayoutView, generic.DetailView):
 	template_name = 'portfolio/category.html'
 	model = Categories
 
-	@property
-	def category(self):
-		return get_object_or_404(Categories, slug=self.kwargs['slug'])
-
-	def get_context_data(self, **kwargs):
-		context = super(CategoryView, self).get_context_data(**kwargs)
-		# See Bernard's tutorial... can you set this up as a method of the category?
-		# self.get_object().category_images
-		# check if category is empty and sort the list before adding it to portfolio
-		context['portfolio'] = Images.objects.filter(category_id=self.category)
-		return context
-
 
 	
 

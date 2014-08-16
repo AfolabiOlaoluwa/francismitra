@@ -4,7 +4,6 @@ class Categories(models.Model):
 	title		= models.CharField(max_length=250)
 	content		= models.TextField(blank=True, null=True)
 	sorter		= models.IntegerField(default=0)
-	# test		= models.IntegerField(default=1)
 	slug		= models.SlugField()
 
 	def __unicode__(self):
@@ -13,6 +12,9 @@ class Categories(models.Model):
 	class Meta:
 		verbose_name_plural = 'categories'
 
+	def get_images(self):
+		return self.images_set.select_related('category')
+		
 	def check_content(self):
 		if self.content:
 			return "something is here"

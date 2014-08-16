@@ -5,6 +5,7 @@
 	{% for posts in tutorial_posts %}
 
 	<a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a><br>
+	<p>{{posts.content|safe}}</p>
 	{% for images in posts.get_images %}
 	<img src="{{ images.photo.url }}" alt="">
 	{% endfor %}

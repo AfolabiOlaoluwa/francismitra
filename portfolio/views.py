@@ -23,11 +23,10 @@ class IndexView(LayoutView, generic.TemplateView):
 		context['aside'] = ['abstract&', 'love&', 'fashion&', 'travel&']
 		return context
 
-
 class CategoryView(LayoutView, generic.DetailView):
 	template_name = 'portfolio/category.html'
 	model = Categories
 
-
-	
+class ResumeView(LayoutView, generic.TemplateView):
+	template_name = 'portfolio/resume.html'
 

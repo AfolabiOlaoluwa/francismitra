@@ -1,16 +1,22 @@
 {% extends "portfolio/layout.html" %}
 {% block content %}
 
-<section class="page">
+<section class="page tutorials">
 	{% for posts in tutorial_posts %}
-
-	<a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a><br>
-	<p>{{posts.content|safe}}</p>
-	{% for images in posts.get_images %}
-	<img src="{{ images.photo.url }}" alt="">
+	<div class="col-10">
+		<div class="row">
+			{% for images in posts.get_images|slice:"1" %}
+			<img src="{{ images.photo.url }}" alt="">
+			{% endfor %}
+			<div class="title-block"><a href="{% url 'blog:blog_single' posts.slug %}"><h2>{{posts.title}}</h2></a></div>
+			<div class="screen"></div>
+		</div>
+		<div class="row">
+			{{posts.created|date:'F jS, Y'}}
+		</div>
+	</div>
 	{% endfor %}
 
-	{% endfor %}
 </section>
 
 {% endblock %}

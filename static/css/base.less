@@ -6,6 +6,7 @@ DEFAULTS, MIXINS, VARIABLES
 @black: #000;
 @gray: #373737;
 @light-gray: lighten(@gray, 30%);
+@red: #ca2953;
 
 @font-base: 13px 'roboto_slablight', arial, sans-serif;
 
@@ -76,9 +77,17 @@ body {
 	&::-webkit-input-placeholder  { color: @color; } 
 }
 
-h1 { font-size: 30px; }
-h2 { font-size: 25px; }
-h3 { font-size: 20px; }
+h1 { 
+	font-size: 30px; 
+	margin-top: 0;
+}
+h2 { 
+	font-size: 13px; 
+	margin: 0;
+	padding: 0;
+	display: inline;
+	font-weight: normal;
+}
 a, a:visited, a:active {
 	color: @light-gray;
 	text-decoration: none;
@@ -99,11 +108,11 @@ a:hover {
 	float: left;
 }
 ::selection {
-    background: @gray;
+    background: @red;
     color: @white;
 }
 ::-moz-selection {
-    background: @gray;
+    background: @red;
     color: @white;
 }
 
@@ -111,6 +120,30 @@ a:hover {
 =================================================
 BLOCK ELEMENTS
 ================================================*/
+@count: 10;
+
+.columnLoop (@i) when (@i > 0) {
+	.col-@{i} {
+		float: left;
+		position: relative;
+		width: percentage(@i/10);
+	}
+	.columnLoop(@i - 1);
+}
+
+.offsetLoop (@i) when (@i > 0) {
+	.offset-l-@{i} {
+		padding-left: percentage(@i/100);
+	}
+	.offset-r-@{i} {
+		padding-right: percentage(@i/100);
+	}
+	.offsetLoop(@i - 1);
+}
+
+.columnLoop(@count);
+.offsetLoop(@count);
+
 .wrapper {
 	width: 100%;
 	margin: @top-position auto 0 auto;
@@ -148,16 +181,7 @@ BLOCK ELEMENTS
 	position: relative;
 }
 
-@columnCount: 6;
 
-.columnLoop (@i) when (@i > 0) {
-	.col-@{i} {
-		float: left;
-		position: relative;
-		width: percentage(1/@i);
-	}
-	.columnLoop(@i - 1);
-}
 
-.columnLoop(@columnCount);
+
 

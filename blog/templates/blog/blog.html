@@ -11,7 +11,7 @@
 	<div class="row">
 		{{posts.created|date:'F jS, Y'}}
 		{% if posts.title %}
-		| <a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a>
+		| <a href="{% url 'blog:blog_single' posts.slug %}"><h2>{{posts.title}}</h2></a>
 		{% endif %}
 	</div>
 

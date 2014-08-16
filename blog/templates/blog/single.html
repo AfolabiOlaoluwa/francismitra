@@ -1,7 +1,9 @@
 {% extends "portfolio/layout.html" %}
 {% block content %}
 
-<section class="page">
+<section class="page single">
+	<h1>{{ posts.title }}</h1>
+	<p>{{ posts.content|safe }}</p>
 	{% for image in posts.get_images %}
 	<img src="{{ image.photo.url }}" alt="">
 	{% endfor %}

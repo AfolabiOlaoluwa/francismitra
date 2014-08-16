@@ -21,6 +21,10 @@ INSTALLED_APPS = (
     'blog'
 )
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates').replace('\\','/'),
+)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

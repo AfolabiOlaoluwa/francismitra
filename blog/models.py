@@ -17,7 +17,6 @@ class Posts(models.Model):
 	def get_images(self):
 		return self.postimages_set.select_related('post')
 
-
 class PostImages(models.Model):
 	post  = models.ForeignKey(Posts)
 	photo = models.ImageField(upload_to='blog/')

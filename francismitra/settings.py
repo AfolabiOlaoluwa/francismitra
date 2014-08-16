@@ -87,7 +87,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 STATIC_URL = '/static/'
 COMPRESS_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Portfolio uploads (change to portfolio dir)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'

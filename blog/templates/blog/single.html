@@ -2,8 +2,6 @@
 {% block content %}
 
 <section class="page">
-	{{posts.title}}
-	<br><br>
 	{% for image in posts.get_images %}
 	<img src="{{ image.photo.url }}" alt="">
 	{% endfor %}

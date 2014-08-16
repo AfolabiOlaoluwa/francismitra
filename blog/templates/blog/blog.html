@@ -8,11 +8,12 @@
 	<img class="blog_images" src="{{ images.photo.url }}" alt="">
 	{% endfor %}
 
-	{% if posts.title %}
 	<div class="row">
-		<a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a><br>
+		{{posts.created|date:'F jS, Y'}}
+		{% if posts.title %}
+		| <a href="{% url 'blog:blog_single' posts.slug %}">{{posts.title}}</a>
+		{% endif %}
 	</div>
-	{% endif %}
 
 	{% endfor %}
 </section>

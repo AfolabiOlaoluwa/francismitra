@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
-		<title>Francis Mitra</title>
+		<title>Francis Mitra{% if page_title %} | {{ page_title }}{% endif %}</title>
 
 		{% load compress %}
 		{% compress css %}
@@ -31,11 +31,11 @@
 				<span class="menu-toggle" data-icon-name="hamburgerCross"></span>
 			</div>
 			<ul class="menu">
+			<!-- temporarily hide videos -->
 			{% for menu_items in menu|slice:"4" %}
-				<!-- temporarily hide videos -->
 				<li><a href="{% url 'portfolio:categories' menu_items.slug %}">{{menu_items.title}}</a></li>
 			{% endfor %}
-				<li><a href="#">Info</a></li>
+				<li><a href="/info">Info</a></li>
 				<li><a href="/resume">Resume</a></li>
 				<li><a href="{% url 'blog:tutorials' %}">Tutorials</a></li>
 				<li><a href="{% url 'blog:blog_home' %}">Blog <span class="update_date">Updated: {{updated_at.created|date:"M d"}}</span></a></li>
@@ -58,7 +58,7 @@
 
 		<footer>
 			<span class="left"><a href="/">Francis Mitra</a> | <a target="_blank" href="https://github.com/fm-qb/francismitra">Source</a></span>
-			<span class="right">&copy 2014</span>
+			<span class="right">&copy {{year}}</span>
 		</footer>
 		</div> <!-- .wrapper -->
 

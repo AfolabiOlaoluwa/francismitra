@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, get_object_or_404
 # from django.http import HttpResponse, Http404
 # from django.template import RequestContext, loader
@@ -10,9 +11,17 @@ class LayoutView(object):
 	template_name = 'portfolio/layout.html'
 
 	def get_context_data(self, **kwargs):
+		extra_content = {
+			'menu': Categories.objects.all().order_by('sorter'),
+			'updated_at': Posts.objects.latest('created'),
+			'year': date.today().year,
+		}
+		
 		context = super(LayoutView, self).get_context_data(**kwargs)
-		context['menu'] = Categories.objects.all().order_by('sorter')
-		context['updated_at'] = Posts.objects.latest('created')
+
+		for key in extra_content:
+			context[key] = extra_content[key]
+
 		return context
 
 class IndexView(LayoutView, generic.TemplateView):
@@ -27,6 +36,23 @@ class CategoryView(LayoutView, generic.DetailView):
 	template_name = 'portfolio/category.html'
 	model = Categories
 
+	def get_context_data(self, **kwargs):
+		context = super(CategoryView, self).get_context_data(**kwargs)
+		context['page_title'] = self.get_object().title
+		return context
+
 class ResumeView(LayoutView, generic.TemplateView):
 	template_name = 'portfolio/resume.html'
 
+	def get_context_data(self, **kwargs):
+		context = super(ResumeView, self).get_context_data(**kwargs)
+		context['page_title'] = 'Resume'
+		return context
+
+class InfoView(LayoutView, generic.TemplateView):
+	template_name = 'portfolio/info.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(InfoView, self).get_context_data(**kwargs)
+		context['page_title'] = 'Info'
+		return context

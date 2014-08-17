@@ -3,7 +3,7 @@
 
 <section class="portfolio">
 {% for image in categories.get_images %}
-	<img src="{{ image.photo.url }}" alt="">
+	<img class="unveil" src="{{ STATIC_URL }}media/loading.gif" data-src="{{ image.photo.url }}" alt="">
 	<div class="row">
 		{{image.year}}
 	</div>

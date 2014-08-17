@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 	/*
 	 *
-	 * Smoothen horizontal portfolio scroll
+	 * Smoothen horizontal portfolio scroll and lazy load images
  	 * 
 	 */
 	$(function() {
@@ -48,5 +48,6 @@ $(document).ready(function() {
 		});
 	});
 
+	$('img.unveil').unveil();
 
 });

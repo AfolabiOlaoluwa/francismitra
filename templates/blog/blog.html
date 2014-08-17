@@ -5,7 +5,7 @@
 	{% for posts in blog_posts %}
 
 	{% for images in posts.get_images %}
-	<img class="blog_images" src="{{ images.photo.url }}" alt="">
+	<img class="blog_images unveil" src="{{ STATIC_URL }}media/loading.gif"  data-src="{{ images.photo.url }}" alt="">
 	{% endfor %}
 
 	<div class="row">

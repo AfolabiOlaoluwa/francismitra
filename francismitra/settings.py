@@ -5,6 +5,7 @@ SECRET_KEY = '5zitr&8^udt!@yd+@lw*$!t8_i)**nhy%80b_7zu%6t$151s%z'
 
 DEBUG = True
 TEMPLATE_DEBUG = True
+# COMPRESS_ENABLED = True
 
 ALLOWED_HOSTS = []
 

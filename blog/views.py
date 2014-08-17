@@ -1,19 +1,19 @@
 from django.shortcuts import render, get_object_or_404
-from django.views import generic
+from django.views.generic import ListView, DetailView
 from blog.models import Posts,PostImages
 from portfolio.views import LayoutView
 
-class BlogView(LayoutView, generic.ListView):
+class BlogView(LayoutView, ListView):
 	template_name = 'blog/blog.html'
-	model = Posts
+	queryset = Posts.objects.exclude(category='TU')
+	context_object_name = 'blog_posts'
 
 	def get_context_data(self, **kwargs):
 		context = super(BlogView, self).get_context_data(**kwargs)
-		context['blog_posts'] = Posts.objects.exclude(category='TU')
 		context['page_title'] = 'Blog'
 		return context
 
-class SingleView(LayoutView, generic.DetailView):
+class SingleView(LayoutView, DetailView):
 	template_name = 'blog/single.html'
 	model = Posts
 
@@ -30,12 +30,12 @@ class SingleView(LayoutView, generic.DetailView):
 
 		return context
 
-class TutorialView(LayoutView, generic.ListView):
+class TutorialView(LayoutView, ListView):
 	template_name = 'blog/tutorials.html'
-	model = Posts
+	queryset = Posts.objects.exclude(category='DE')
+	context_object_name = 'tutorial_posts'
 
 	def get_context_data(self, **kwargs):
 		context = super(TutorialView, self).get_context_data(**kwargs)
-		context['tutorial_posts'] = Posts.objects.exclude(category='DE')
 		context['page_title'] = 'Tutorials'
 		return context

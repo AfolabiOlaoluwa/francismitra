@@ -2,7 +2,7 @@ from datetime import date
 from django.shortcuts import render, get_object_or_404
 # from django.http import HttpResponse, Http404
 # from django.template import RequestContext, loader
-from django.views import generic
+from django.views.generic import DetailView, TemplateView
 from portfolio.models import Images, Categories, Videos
 from blog.models import Posts
 
@@ -16,7 +16,7 @@ class LayoutView(object):
 			'updated_at': Posts.objects.latest('created'),
 			'year': date.today().year,
 		}
-		
+
 		context = super(LayoutView, self).get_context_data(**kwargs)
 
 		for key in extra_content:
@@ -24,7 +24,7 @@ class LayoutView(object):
 
 		return context
 
-class IndexView(LayoutView, generic.TemplateView):
+class IndexView(LayoutView, TemplateView):
 	template_name = 'portfolio/index.html'
 
 	def get_context_data(self, **kwargs):
@@ -32,7 +32,7 @@ class IndexView(LayoutView, generic.TemplateView):
 		context['aside'] = ['abstract&', 'love&', 'fashion&', 'travel&']
 		return context
 
-class CategoryView(LayoutView, generic.DetailView):
+class CategoryView(LayoutView, DetailView):
 	template_name = 'portfolio/category.html'
 	model = Categories
 
@@ -41,7 +41,7 @@ class CategoryView(LayoutView, generic.DetailView):
 		context['page_title'] = self.get_object().title
 		return context
 
-class ResumeView(LayoutView, generic.TemplateView):
+class ResumeView(LayoutView, TemplateView):
 	template_name = 'portfolio/resume.html'
 
 	def get_context_data(self, **kwargs):
@@ -49,7 +49,7 @@ class ResumeView(LayoutView, generic.TemplateView):
 		context['page_title'] = 'Resume'
 		return context
 
-class InfoView(LayoutView, generic.TemplateView):
+class InfoView(LayoutView, TemplateView):
 	template_name = 'portfolio/info.html'
 
 	def get_context_data(self, **kwargs):

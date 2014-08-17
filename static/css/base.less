@@ -8,6 +8,8 @@ DEFAULTS, MIXINS, VARIABLES
 @light-gray: lighten(@gray, 30%);
 @red: #ca2953;
 
+// @font-base: 13px 'roboto_slabthin', arial, sans-serif;
+// @font-base: 13px 'letter_gothic_medium', arial, sans-serif;
 @font-base: 13px 'roboto_slablight', arial, sans-serif;
 
 @xlarge-font: 25px;
@@ -53,6 +55,9 @@ body {
 	color: @black;
 	font-weight: 100;
 	margin: 0 auto;
+	@media @medium-screen {
+		font-size: 14px;
+	}
 }
 * {
 	box-sizing: border-box;
@@ -94,6 +99,12 @@ h2 {
 h3 {
 	.normalize-header
 }
+
+strong {
+	font-weight: normal;
+	font-family: roboto_slabregular;
+}
+
 a, a:visited, a:active {
 	color: @light-gray;
 	text-decoration: none;

@@ -10,7 +10,8 @@ nav {
 	z-index: 1;
 	position: fixed;
 	width: 100%;
-	font-family: 'roboto_slabthin', arial, sans-serif;
+	font-family: 'letter_gothic_medium', arial, sans-serif;
+	// font-family: 'roboto_slabthin', arial, sans-serif;
 	max-width: @max-width;
 	height: @portfolio-height;
 	> div {
@@ -56,6 +57,9 @@ nav {
 			margin: 0 0 3px 0;
 			color: lighten(@gray, 50%);
 			padding: 0;
+			&:first-child {
+				margin-top: 5px;
+			}
 			&:last-child {
 				margin-bottom: 0;
 			}
@@ -106,10 +110,14 @@ nav {
 a.author {
 	float: left;
 	text-transform: uppercase;
-	// font-family: josefin_sansthin;
-	// font-family: 'ralewaylight', arial, sans-serif;
+	font-family: letter_gothic_medium;
 	color: #fff;
-	font-size: @medium-font;
+	font-size: 16px;
+	margin-top: 2px;
+	strong {
+		font-weight: bold;
+		font-family: letter_gothic_medium;
+	}
 }
 
 .menu-toggle {
@@ -163,7 +171,9 @@ a.author {
 
 footer {
 	position: fixed;
-	font-family: 'ralewaylight', arial, sans-serif;
+	// font-family: 'letter_gothic_medium', arial, sans-serif;
+	// font-family: 'roboto_slablight', arial, sans-serif;
+	// font-family: 'ralewaylight', arial, sans-serif;
 	z-index: 5;
 	bottom: 0;
 	left: 0;
@@ -373,7 +383,7 @@ RESUME
 }
 
 .degree {
-	font-family: 'roboto_slabthin', arial, sans-serif;
+	font-family: 'letter_gothic_medium', arial, sans-serif;
 	font-size: 30px;
 }
 
@@ -409,7 +419,7 @@ RESUME
 		}
 	}
 	h3 {
-		// do something with this font
+		font-family: roboto_slabregular;
 	}
 }
 

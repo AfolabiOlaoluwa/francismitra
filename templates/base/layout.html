@@ -25,9 +25,9 @@
 
 		<div class="wrapper">
 
-		<nav>
+		<nav{% if mobile_home %} class="{{ mobile_home }}" {% endif %}>
 			<div class="clearfix">
-				<a class="author" href="/portfolio">Francis Mitra</a>
+				<a class="author" href="/">Francis Mitra</a>
 				<span class="menu-toggle" data-icon-name="hamburgerCross"></span>
 			</div>
 			<ul class="menu">

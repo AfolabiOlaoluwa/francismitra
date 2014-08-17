@@ -25,13 +25,12 @@ $(document).ready(function() {
 	/*
 	 *
 	 * Animations for mobile menu
-	 * Edit this to fix nav height on return to desktop
  	 * 
 	 */
 	$.fn.animateMenu = function() {
 		var height = this.css('height');
 		if(height == '50px') {
-			this.animate({'height':'362px'}, 600);
+			this.animate({'height':'370px'}, 600);
 		} else {
 			this.animate({'height':'50px'}, 600);
 		}

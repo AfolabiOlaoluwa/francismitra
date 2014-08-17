@@ -37,7 +37,8 @@ nav {
 		z-index: 3; 
 		width: 100%;
 		border-bottom: 1px solid lighten(@black, 20%);
-		background-color: fadeout(@black, 25%);
+		// background-color: darken(@gray, 20%);
+		background-color: fadeout(@black, 5%);
 		top: 0;
 		left: 0;
 		height: 50px;
@@ -45,7 +46,8 @@ nav {
 	}
 	> ul.aside, ul.menu {
 		list-style: none;
-		height: 100%;
+		height: @portfolio-height; // declare height to because of JS nav animation
+		// height: 100%;
 		width: 170px;
 		float: right;
 		font-size: @xlarge-font;
@@ -137,7 +139,27 @@ a.author {
 	}
 }
 
-// add space between footer and content for v.scroll
+@media @medium-screen {
+	nav.mobile_home {
+		height: 100%;
+		> div {
+			display: none;
+		}
+		background-color: @black;
+		ul li {
+			// Mobil XL
+			font-size: 35px;
+			// 460px (iPhone 5)
+			@media (max-height: 460px) {
+				font-size: 33px;
+			}
+			// 372px (iPhone 4)
+			@media (max-height: 372px) {
+				font-size: 25px;
+			}
+		}
+	}
+}
 
 footer {
 	position: fixed;

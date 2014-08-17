@@ -1,17 +1,28 @@
 from datetime import date
-from django.shortcuts import render, get_object_or_404
+# from django.shortcuts import render, get_object_or_404
 # from django.http import HttpResponse, Http404
 # from django.template import RequestContext, loader
 from django.views.generic import DetailView, TemplateView
 from portfolio.models import Images, Categories, Videos
 from blog.models import Posts
 
-# Mixin to create menu
 class LayoutView(object):
-	template_name = 'portfolio/layout.html'
+	'''
+	Mixin for layout template - pulls portfolio categories for menu,
+	current year for footer, and date of latest blog update
+	'''
+	# @property
+	# def get_layout_content(self):
+	# 	layout_content = {
+	# 		'menu': Categories.objects.all().order_by('sorter'),
+	# 		'updated_at': Posts.objects.latest('created'),
+	# 		'year': date.today().year,
+	# 	}
+
+	# 	return layout_content
 
 	def get_context_data(self, **kwargs):
-		extra_content = {
+		layout_content = {
 			'menu': Categories.objects.all().order_by('sorter'),
 			'updated_at': Posts.objects.latest('created'),
 			'year': date.today().year,
@@ -19,8 +30,8 @@ class LayoutView(object):
 
 		context = super(LayoutView, self).get_context_data(**kwargs)
 
-		for key in extra_content:
-			context[key] = extra_content[key]
+		for key in layout_content:
+			context[key] = layout_content[key]
 
 		return context
 
@@ -30,6 +41,7 @@ class IndexView(LayoutView, TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(IndexView, self).get_context_data(**kwargs)
 		context['aside'] = ['abstract&', 'love&', 'fashion&', 'travel&']
+		context['mobile_home'] = 'mobile_home'
 		return context
 
 class CategoryView(LayoutView, DetailView):

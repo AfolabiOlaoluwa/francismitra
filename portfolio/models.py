@@ -14,15 +14,17 @@ class Categories(models.Model):
 
 	def get_images(self):
 		return self.images_set.select_related('category')
-		
+
 	def check_content(self):
 		if self.content:
 			return "something is here"
 		else:
 			return "nothing is here"
 
-# Abstract base class for video and image content
 class BaseMedia(models.Model):
+	'''
+	Base class for use with video and photo content
+	'''
 	category 	= models.ForeignKey(Categories)
 	title   	= models.CharField(max_length=250)
 	caption		= models.CharField(max_length=250, blank=True, null=True)

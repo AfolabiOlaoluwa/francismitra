@@ -56,8 +56,18 @@ $(document).ready(function() {
 
 var social = {}
 
+/*
+ *
+ * MODELS
+ *
+ */
 social.Instagram = Backbone.Model.extend();
 
+/*
+ *
+ * COLLECTIONS
+ *
+ */
 social.InstagramFeed = Backbone.Collection.extend({
 	model: social.Instagram,
 	url: 'https://api.instagram.com/v1/users/2968231/media/recent/?client_id=af80dd4c67de439fba77ac4c4743ead0',
@@ -75,25 +85,39 @@ social.InstagramFeed = Backbone.Collection.extend({
 	}
 });
 
+/*
+ *
+ * VIEWS
+ *
+ */
 social.InstagramView = Backbone.View.extend({
 	el: '#social',
 	feed: {},
 	initialize: function() {
 		this.collection = new social.InstagramFeed();
+
+		this.collection.on('sync', this.render, this);
+
 		this.fetchData();
-		this.render();
 	},
 	render: function() {
-		console.log(this.feed);
+		var images = '';
+		for(var i = 0; i < this.feed.length; i++) {
+			var photo = this.feed[i].images.standard_resolution.url;
+			var caption = this.feed[i].caption == null ? 'no caption' : this.feed[i].caption.text;
+			var likes = this.feed[i].likes.count;
+			var id = this.feed[i].id;
+
+			images += '<img src="'+photo+'" data-caption="'+caption+'" data-likes="'+likes+'" data-id="'+id+'" alt="">';
+		}
+
+		$('#social').append(images);
 	},
 	fetchData: function() {
+		var self = this;
 		this.collection.fetch({
 			success: function(collection, response) {
-
-				// console.log(response);
-				feed = response;
-				// console.log(this.feed);
-
+				self.feed = response.data;
 			},
 			error: function() {
 				console.log("failed to find instagram feed...");

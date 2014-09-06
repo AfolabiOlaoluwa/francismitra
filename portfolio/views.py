@@ -68,3 +68,12 @@ class InfoView(LayoutView, TemplateView):
 		context = super(InfoView, self).get_context_data(**kwargs)
 		context['page_title'] = 'Info'
 		return context
+
+class BackboneView(LayoutView, TemplateView):
+	template_name = 'portfolio/backbone.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(BackboneView, self).get_context_data(**kwargs)
+		context['page_tite'] = 'Backbone'
+		return context
+

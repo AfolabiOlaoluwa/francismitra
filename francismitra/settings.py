@@ -19,7 +19,8 @@ INSTALLED_APPS = (
     'south',
     'compressor',
     'portfolio',
-    'blog'
+    'blog',
+    'social',
 )
 
 TEMPLATE_DIRS = (

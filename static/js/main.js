@@ -72,7 +72,8 @@ social.InstagramFeed = Backbone.Collection.extend({
 	model: social.Instagram,
 	url: 'https://api.instagram.com/v1/users/2968231/media/recent/?client_id=af80dd4c67de439fba77ac4c4743ead0',
 	parse: function(response) {
-		return response.results;
+		return response;
+		// return response.results;
 	},
 	sync: function(method, model, options) {
 		var params = _.extend({
@@ -101,17 +102,20 @@ social.InstagramView = Backbone.View.extend({
 		this.fetchData();
 	},
 	render: function() {
-		var images = '';
+		var images = {};
+
 		for(var i = 0; i < this.feed.length; i++) {
 			var photo = this.feed[i].images.standard_resolution.url;
 			var caption = this.feed[i].caption == null ? 'no caption' : this.feed[i].caption.text;
 			var likes = this.feed[i].likes.count;
 			var id = this.feed[i].id;
 
-			images += '<img src="'+photo+'" data-caption="'+caption+'" data-likes="'+likes+'" data-id="'+id+'" alt="">';
+			images[i] = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
 		}
 
-		$('#social').append(images);
+		var template = _.template($('#instagram-template').html());
+		this.$el.html(template({ collection: images }));
+
 	},
 	fetchData: function() {
 		var self = this;

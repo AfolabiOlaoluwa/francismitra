@@ -1,8 +1,17 @@
 {% extends "base/layout.html" %}
 {% block content %}
 
-<section class="page" id="social">
+<section class="page">
 	<a class="instagram-link" href="{{link}}">Connect with Instagram</a>
+
+	<div id="social">
+		<script type="text/template" id="instagram-template">
+		<% _.each(collection, function(item) { %>
+			<img src="<%= item.photo %>" data-id="<%= item.id %>" data-caption="<%= item.caption %>" data-likes="<%= item.likes %>">
+		<% }); %>
+		</script>
+	</div>
+
 </section>
 
 {% endblock %}

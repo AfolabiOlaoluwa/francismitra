@@ -14,15 +14,14 @@ social.InstagramModel = Backbone.Model.extend();
  */
 social.InstagramCollection = Backbone.Collection.extend({
 	model: social.InstagramModel,
-	url: 'https://api.instagram.com/v1/users/2968231/media/recent/?client_id=af80dd4c67de439fba77ac4c4743ead0',
+	url: 'http://127.0.0.1:8000/social/instagram',
 	parse: function(response) {
 		return response;
-		// return response.results;
 	},
 	sync: function(method, model, options) {
 		var params = _.extend({
 			type: 'GET',
-            dataType: 'jsonp',
+            dataType: 'json',
             url: this.url,
             processData: false
 		}, options);
@@ -59,7 +58,6 @@ social.InstagramView = Backbone.View.extend({
 
 		var template = _.template($('#instagram-template').html());
 		this.$el.html(template({ collection: images }));
-
 	},
 	fetchData: function() {
 		var self = this;
@@ -73,21 +71,5 @@ social.InstagramView = Backbone.View.extend({
 		});
 	}
 });
-
-
-/*
- *
- * ROUTES
- *
- */
-// social.InstagramRouter = Backbone.Router.extend({
-// 	routes: {
-// 		'search/:query': 'search'
-// 	},
-// 	search: function(query) {
-// 		alert("test");
-// 	},
-// 	router.on
-// }); 
 
 social.instagramview = new social.InstagramView;

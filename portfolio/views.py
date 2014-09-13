@@ -6,11 +6,11 @@ from django.views.generic import DetailView, TemplateView
 from portfolio.models import Images, Categories, Videos
 from blog.models import Posts
 
+'''
+Mixin for layout template - pulls portfolio categories for menu,
+current year for footer, and date of latest blog update
+'''
 class LayoutView(object):
-	'''
-	Mixin for layout template - pulls portfolio categories for menu,
-	current year for footer, and date of latest blog update
-	'''
 	# @property
 	# def get_layout_content(self):
 	# 	layout_content = {

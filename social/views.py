@@ -16,7 +16,7 @@ INSTAGRAM_CONFIG = {
 unauthenticated_api = client.InstagramAPI(**INSTAGRAM_CONFIG)
 
 class JSONResponseMixin(object):
-	# Returns a JSON response containing 'context' as payload
+    # Returns a JSON response containing 'context' as payload
     def render_to_response(self, context):
         return self.get_json_response(self.convert_context_to_json(context))
 

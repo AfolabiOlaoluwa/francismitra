@@ -2,7 +2,9 @@
 {% block content %}
 
 <section class="page" id="test">
+	{% if link %}
 	<a class="instagram-link" href="{{link}}">Connect with Instagram</a>
+	{% endif %}
 	<div id="social">
 		<script type="text/template" id="instagram-template">
 		<% _.each(collection, function(item) { %>

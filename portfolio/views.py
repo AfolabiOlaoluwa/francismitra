@@ -50,7 +50,7 @@ class CategoryView(LayoutView, DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super(CategoryView, self).get_context_data(**kwargs)
-		context['page_title'] = self.get_object().title
+		context['page_title'] = 'Portfolio | %s' % (self.get_object().title)
 		return context
 
 class ResumeView(LayoutView, TemplateView):
@@ -67,13 +67,5 @@ class InfoView(LayoutView, TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(InfoView, self).get_context_data(**kwargs)
 		context['page_title'] = 'Info'
-		return context
-
-class BackboneView(LayoutView, TemplateView):
-	template_name = 'portfolio/backbone.html'
-
-	def get_context_data(self, **kwargs):
-		context = super(BackboneView, self).get_context_data(**kwargs)
-		context['page_tite'] = 'Backbone'
 		return context
 

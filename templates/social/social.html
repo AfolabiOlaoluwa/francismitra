@@ -1,45 +1,19 @@
 {% extends "base/layout.html" %}
 {% block content %}
 
-<style>
-#todo-list input.edit {
-  display: none; 
-}
-#todo-list .editing label {
-  display: none; 
-}
-#todo-list .editing input.edit {
-  display: inline; 
-}
-</style>
-
 <section class="page" id="test">
-	<section id="todoapp">
-	  <header id="header">
-	    <h1>Todos</h1>
-	    <input id="new-todo" placeholder="What needs to be done?">
-	  </header>
-	  <section id="main">
-	    <ul id="todo-list"></ul>
-
-	  </section>
-	</section>
-
-	<!-- setting up a template for backbone -->
-	<script type="text/template" id="item-template">
-	   <div class="view">
-	     <input class="toggle" type="checkbox">
-	     <label><%- title %></label>
-	     <input class="edit" value="<%- title %>">
-	     <button class="destroy">remove</button>
-	   </div>
-	 </script>
-
-	<!-- <button id="add-friend">Add Friend</button>
-	<button id="find-info">Find Info</button>
-	<button id="change-info">Change Info</button>
-	<ul id="friends-list">
-	</ul> -->
+	<a class="instagram-link" href="{{link}}">Connect with Instagram</a>
+	<br>
+	{{test}}
+	<br><br>
+	{{popular_media}}
+	<div id="social">
+		<script type="text/template" id="instagram-template">
+		<% _.each(collection, function(item) { %>
+			<img src="<%= item.photo %>" data-id="<%= item.id %>" data-caption="<%= item.caption %>" data-likes="<%= item.likes %>">
+		<% }); %>
+		</script>
+	</div>
 </section>
 
 {% endblock %}

@@ -8,7 +8,17 @@
 	<div id="social">
 		<script type="text/template" id="instagram-template">
 		<% _.each(collection, function(item) { %>
-			<img src="<%= item.photo %>" data-id="<%= item.id %>" data-caption="<%= item.caption %>" data-likes="<%= item.likes %>">
+			<div class="instagram-wrapper">
+				<div class="instagram-hover">
+					<div class="details" data-id="<%= item.id %>">
+						<div class="outercontainer"><div class="innercontainer">
+							<a href="/social/media_like/<%= item.id %>"><span><%= item.likes %> <span class="hearts">&hearts;</span></span></a><br>
+							<span class="caption"><%= item.caption %></span>
+						</div></div>
+					</div>
+				</div>
+				<img src="<%= item.photo %>" data-id="<%= item.id %>" data-caption="<%= item.caption %>" data-likes="<%= item.likes %>">
+				</div>
 		<% }); %>
 		</script>
 	</div>

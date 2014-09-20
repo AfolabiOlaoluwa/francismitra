@@ -44,9 +44,9 @@ class AuthenticateInstagram(object):
 		except Exception, e:
 			print e
 
-
-
-
+	def like_instagram_photo(self, token, id):
+		api = client.InstagramAPI(access_token=token)
+		api.like_media(media_id=id)
 
 
 

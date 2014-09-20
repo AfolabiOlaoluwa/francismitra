@@ -10,5 +10,9 @@ urlpatterns = patterns('',
 		views.InstagramFeed.as_view(),
 		name='instagram'
 	),
+	url(r'^media_like', 
+		views.MediaLike.as_view(),
+		name='media_like'
+	),
 )
 

@@ -37,6 +37,9 @@ social.InstagramCollection = Backbone.Collection.extend({
 social.InstagramView = Backbone.View.extend({
 	el: '#social',
 	feed: {},
+		events: {
+		'click .details': 'likeMedia'
+	},
 	initialize: function() {
 		this.collection = new social.InstagramCollection();
 
@@ -48,12 +51,12 @@ social.InstagramView = Backbone.View.extend({
 		var images = {};
 
 		for(var i = 0; i < this.feed.length; i++) {
-			var photo = this.feed[i].images.standard_resolution.url;
-			var caption = this.feed[i].caption == null ? 'no caption' : this.feed[i].caption.text;
-			var likes = this.feed[i].likes.count;
-			var id = this.feed[i].id;
+			var photo   = this.feed[i].images.standard_resolution.url;
+			var caption = this.feed[i].caption == null ? '' : this.feed[i].caption.text;
+			var likes   = this.feed[i].likes.count;
+			var id      = this.feed[i].id;
 
-			images[i] = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
+			images[i]   = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
 		}
 
 		var template = _.template($('#instagram-template').html());
@@ -69,6 +72,21 @@ social.InstagramView = Backbone.View.extend({
 				console.log("failed to find instagram feed...");
 			}
 		});
+	},
+	likeMedia: function(e) {
+		// var media_id = e.getAttribute('data-id');
+		var media_id   = e.currentTarget.getAttribute('data-id');
+		var media_like = 'http://127.0.0.1:8000/social/media_like?id='
+
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: media_like+media_id,
+			success: function(data) {
+				console.log(data);
+			}
+		});
+
 	}
 });
 

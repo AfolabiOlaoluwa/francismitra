@@ -5,7 +5,7 @@ var social = {}
  * MODELS
  *
  */
-social.InstagramModel = Backbone.Model.extend();
+social.InstagramModel = Backbone.Model;
 
 /*
  *
@@ -74,7 +74,6 @@ social.InstagramView = Backbone.View.extend({
 		});
 	},
 	likeMedia: function(e) {
-		// var media_id = e.getAttribute('data-id');
 		var media 	    = e.currentTarget,
 			media_id    = media.getAttribute('data-id'),
 			media_count = Number(media.getAttribute('data-likes')),
@@ -85,13 +84,21 @@ social.InstagramView = Backbone.View.extend({
 			count.text(media_count+1);
 		}
 
+		var likeMediaFail = function() {
+			// create some kind of graphic notice
+		}
+
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
 			url: media_like+media_id,
 			success: function(data) {
-				likeMediaSuccess();
-				// console.log(data);
+				if(data.result == 'success') {
+					likeMediaSuccess();
+				} else if (data.result == 'fail') {
+					console.log(data);
+					likeMediaFail();
+				}
 			}
 		});
 

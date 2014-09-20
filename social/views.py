@@ -2,7 +2,6 @@ import json
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.detail import BaseDetailView
-from django.views.generic.base import RedirectView
 from django import http
 from social.models import PersonalInstagram, AuthenticateInstagram
 from portfolio.views import LayoutView
@@ -95,14 +94,15 @@ class MediaLike(JSONResponseMixin, BaseDetailView):
 
 			try: 
 				instagram_user.like_instagram_photo(token, id)
-				json_response = {'success':id}
+				json_response = {'result':'success'}
 
 			except Exception, e:
-				json_response = {'failed':e}
+				json_response = {'result':'fail', 'message':e}
 
-			context = json_response
+		else:
+			json_response = {'result':'fail', 'message':'not logged in'}
 
-		# Put a check here to see if session does not exist
+		context = json_response
 
 		return self.render_to_response(context)
 

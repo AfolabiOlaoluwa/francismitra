@@ -35,9 +35,6 @@ a.instagram-link {
 			padding: 15px;
 			span.caption {
 				font-size: 22px;
-				@media @medium-screen {
-					font-size: 17px;
-				}
 			}
 			span.hearts {
 				font-size: 45px;
@@ -50,5 +47,27 @@ a.instagram-link {
 	}
 	&:hover .instagram-hover {
 		display: block;
+	}
+	@media @medium-screen {
+		.instagram-hover {
+			height: 20%;
+			top: auto;
+			bottom: 0;
+			display: block;
+		}
+		span.caption {
+			display: none;
+		}
+	}
+	@media @small-screen {
+		.instagram-hover {
+			.details {
+				padding: 10px 10px 8px 10px;
+				font-size: 25px;
+				span.hearts {
+					font-size: 30px;
+				}
+			}
+		}
 	}
 }

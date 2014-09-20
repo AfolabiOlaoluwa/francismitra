@@ -14,11 +14,14 @@ INSTAGRAM_CONFIG = {
 	'redirect_uri': 'http://127.0.0.1:8000/social',
 }
 
-# Begin authentication to allow viewers to 'comment' and 'like' media
-# Authentication is completed after user requests access token
+'''
+Begin authentication to allow viewers to 'comment' and 'like' media.
+Authentication is completed after user requests access token through
+class SocialView and verified through checking session['access_token']
+'''
 instagram_user = AuthenticateInstagram(INSTAGRAM_CONFIG['client_id'], 
-	                                      INSTAGRAM_CONFIG['client_secret'], 
-	                                      INSTAGRAM_CONFIG['redirect_uri'])
+	                                   INSTAGRAM_CONFIG['client_secret'], 
+	                                   INSTAGRAM_CONFIG['redirect_uri'])
 
 class JSONResponseMixin(object):
 	# Returns a JSON response containing 'context' as payload
@@ -36,7 +39,9 @@ class JSONResponseMixin(object):
 		return json.dumps(context)
 
 '''
-Personal Instagram feed rendered as JSON response
+Personal Instagram feed rendered as JSON response.
+Does not require authentication and is an instance of
+a separate model
 '''		
 class InstagramFeed(JSONResponseMixin, BaseDetailView):
 	def get(self, request, *args, **kwargs):
@@ -53,7 +58,7 @@ class InstagramFeed(JSONResponseMixin, BaseDetailView):
 
 '''
 Allow visitors the option to connect via
-the API to perform authenticated actions
+the API to perform authenticated actions on model PersonalInstagram
 '''
 class SocialView(LayoutView, TemplateView):
 	template_name = 'social/social.html'
@@ -79,8 +84,7 @@ class SocialView(LayoutView, TemplateView):
 		return context
 
 '''
-Allow authenticated users to 'like' personal
-Instagram feed
+Allow authenticated users to 'like' personal Instagram feed
 '''
 class MediaLike(JSONResponseMixin, BaseDetailView):
 	def get(self, request, *args, **kwargs):

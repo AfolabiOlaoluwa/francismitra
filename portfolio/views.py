@@ -1,7 +1,4 @@
 from datetime import date
-# from django.shortcuts import render, get_object_or_404
-# from django.http import HttpResponse, Http404
-# from django.template import RequestContext, loader
 from django.views.generic import DetailView, TemplateView
 from portfolio.models import Images, Categories, Videos
 from blog.models import Posts

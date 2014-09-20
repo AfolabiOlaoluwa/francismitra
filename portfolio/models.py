@@ -21,10 +21,10 @@ class Categories(models.Model):
 		else:
 			return "nothing is here"
 
+'''
+Base class for use with video and photo content
+'''
 class BaseMedia(models.Model):
-	'''
-	Base class for use with video and photo content
-	'''
 	category 	= models.ForeignKey(Categories)
 	title   	= models.CharField(max_length=250)
 	caption		= models.CharField(max_length=250, blank=True, null=True)

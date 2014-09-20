@@ -51,10 +51,10 @@ social.InstagramView = Backbone.View.extend({
 		var images = {};
 
 		for(var i = 0; i < this.feed.length; i++) {
-			var photo   = this.feed[i].images.standard_resolution.url;
-			var caption = this.feed[i].caption == null ? '' : this.feed[i].caption.text;
-			var likes   = this.feed[i].likes.count;
-			var id      = this.feed[i].id;
+			var photo   = this.feed[i].images.standard_resolution.url,
+				caption = this.feed[i].caption == null ? '' : this.feed[i].caption.text,
+				likes   = this.feed[i].likes.count,
+				id      = this.feed[i].id;
 
 			images[i]   = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
 		}
@@ -75,10 +75,10 @@ social.InstagramView = Backbone.View.extend({
 	},
 	likeMedia: function(e) {
 		// var media_id = e.getAttribute('data-id');
-		var media 	    = e.currentTarget;
-		var media_id    = media.getAttribute('data-id');
-		var media_count = Number(media.getAttribute('data-likes'));
-		var media_like  = 'http://127.0.0.1:8000/social/media_like?id='
+		var media 	    = e.currentTarget,
+			media_id    = media.getAttribute('data-id'),
+			media_count = Number(media.getAttribute('data-likes')),
+			media_like  = 'http://127.0.0.1:8000/social/media_like?id=';
 
 		var likeMediaSuccess = function() {
 			var count = $(media).find('.likes');

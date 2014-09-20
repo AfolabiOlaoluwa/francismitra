@@ -2,12 +2,15 @@
 
 	$(function() {
 
-		var menu = new Menu();
-
+		// Enable horizontal scrolling on portfolio
 		$('html, body').mousewheel(function(event, delta) {
 			this.scrollLeft -= (delta * 10); 
 		});
+
+		// Lazy load images
 		$('img.unveil').unveil();
+
+		var menu = new Menu();
 
 		new svgIcon( document.querySelector( '.menu-toggle' ), 
 			svgIconConfig, { 
@@ -33,7 +36,8 @@
 
 			// Default values
 			var	min_height  = '50px',
-				max_height  = '345px';
+				max_height  = '380px',
+				speed 		= 600;
 
 			// Animate each item in array
 			for (var i = 0; i < items.length; i++) {
@@ -42,9 +46,9 @@
 					height = item.css('height');
 
 				if(height == min_height) {
-					item.animate({'height': max_height}, 600);
+					item.animate({'height': max_height}, speed);
 				} else {
-					item.animate({'height': min_height}, 600);
+					item.animate({'height': min_height}, speed);
 				}
 
 			}

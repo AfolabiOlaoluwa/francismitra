@@ -19,9 +19,24 @@ DEFAULTS, MIXINS, VARIABLES
 
 // Positioning
 @max-width: 1200px;
-@portfolio-height: 550px;
+@portfolio-height: 600px;
+@portfolio-height_sz1: 400px;
+@portfolio-height_sz2: 470px;
+@portfolio-height_sz3: 550px;
 @top-position: 70px;
 
+.portfolio_responses() {
+	@media (max-height: 750px) {
+		height: @portfolio-height_sz3;
+	}
+	@media (max-height: 700px) {
+		height: @portfolio-height_sz2;
+	}
+	@media (max-height: 600px) {
+		height: @portfolio-height_sz1;
+	}
+}
+	
 .basepadding (@padding: 0 10px) {
 	padding: @padding;
 }

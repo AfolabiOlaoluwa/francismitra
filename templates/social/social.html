@@ -10,9 +10,9 @@
 		<% _.each(collection, function(item) { %>
 			<div class="instagram-wrapper">
 				<div class="instagram-hover">
-					<div class="details" data-id="<%= item.id %>">
+					<div class="details" data-id="<%= item.id %>" data-likes="<%= item.likes %>">
 						<div class="outercontainer"><div class="innercontainer">
-							<span><%= item.likes %> <span class="hearts">&hearts;</span></span><br>
+							<span class="likes"><%= item.likes %></span> <span class="hearts">&hearts;</span><br>
 							<span class="caption"><%= item.caption %></span>
 						</div></div>
 					</div>

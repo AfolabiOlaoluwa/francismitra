@@ -37,7 +37,7 @@ social.InstagramCollection = Backbone.Collection.extend({
 social.InstagramView = Backbone.View.extend({
 	el: '#social',
 	feed: {},
-		events: {
+	events: {
 		'click .details': 'likeMedia'
 	},
 	initialize: function() {
@@ -75,15 +75,23 @@ social.InstagramView = Backbone.View.extend({
 	},
 	likeMedia: function(e) {
 		// var media_id = e.getAttribute('data-id');
-		var media_id   = e.currentTarget.getAttribute('data-id');
-		var media_like = 'http://127.0.0.1:8000/social/media_like?id='
+		var media 	    = e.currentTarget;
+		var media_id    = media.getAttribute('data-id');
+		var media_count = Number(media.getAttribute('data-likes'));
+		var media_like  = 'http://127.0.0.1:8000/social/media_like?id='
+
+		var likeMediaSuccess = function() {
+			var count = $(media).find('.likes');
+			count.text(media_count+1);
+		}
 
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
 			url: media_like+media_id,
 			success: function(data) {
-				console.log(data);
+				likeMediaSuccess();
+				// console.log(data);
 			}
 		});
 

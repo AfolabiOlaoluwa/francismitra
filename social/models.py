@@ -9,6 +9,7 @@ class PersonalInstagram(object):
 		self.client_id = client_id
 
 	def find_feed(self):
+		# Consume feed without authorization
 		url      = 'https://api.instagram.com/v1/users/%s/media/recent/?client_id=%s' % (self.user_id, self.client_id)
 		response = urllib2.urlopen(url)
 		data     = json.load(response)

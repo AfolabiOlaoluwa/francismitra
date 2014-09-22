@@ -5,6 +5,12 @@
 {% for image in categories.get_images %}
 	<img class="unveil" src="{{ STATIC_URL }}media/loading.gif" data-src="{{ image.photo.url }}" alt="">
 	<div class="row">
+		{% if image.caption %}
+		{{image.caption}} <span> | </span>
+		{% endif %}
+		{% if image.title %}
+		{{image.title}} <span> | </span>
+		{% endif %}
 		{{image.year}}
 	</div>
 {% endfor %}

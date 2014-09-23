@@ -1,6 +1,9 @@
-(function($, window, document) {
+var portfolio = {}
 
-	$(function() {
+portfolio.DefaultView = Backbone.View.extend({
+	el: 'body',
+	initialize: function() {
+		var self = this;
 
 		// Enable horizontal scrolling on portfolio
 		$('html, body').mousewheel(function(event, delta) {
@@ -10,8 +13,7 @@
 		// Lazy load images
 		$('img.unveil').unveil();
 
-		var menu = new Menu();
-
+		// Initialize animated menu icon
 		new svgIcon( document.querySelector( '.menu-toggle' ), 
 			svgIconConfig, { 
 				easing		: mina.elastic, 
@@ -23,39 +25,30 @@
 						nav_push  = document.querySelector('.nav-push'),
 						toAnimate = [nav, nav_push];
 
-					menu.animateMenu(toAnimate);
+					self.animateMenu(toAnimate);
 
 				}
 			} );
+	},
+	animateMenu: function(items) {
+		var speed 		= 600,
+			max_height	= '380px',
+			min_height	= '50px';
 
-	});
+		for (var i = 0; i < items.length; i++) {
 
-	var Menu = function() {
-		this.min_height = '50px';
-		this.max_height = '380px';
-		this.speed		= 600;
-	};
+			var item   = $(items[i]),
+				height = item.css('height');
 
-	Menu.prototype = {
-		animateMenu: function(items) {
-			var speed 		= this.speed,
-				max_height	= this.max_height,
-				min_height	= this.min_height;
-
-			for (var i = 0; i < items.length; i++) {
-
-				var item   = $(items[i]),
-					height = item.css('height');
-
-				if(height == min_height) {
-					item.animate({'height': max_height}, speed);
-				} else {
-					item.animate({'height': min_height}, speed);
-				}
-
+			if(height == min_height) {
+				item.animate({'height': max_height}, speed);
+			} else {
+				item.animate({'height': min_height}, speed);
 			}
-		}
-	};
 
-}(window.jQuery, window, document));
+		}
+	}
+});
+
+portfolio.defaultview = new portfolio.DefaultView;
 

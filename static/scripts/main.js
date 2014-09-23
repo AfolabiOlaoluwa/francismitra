@@ -30,14 +30,18 @@
 
 	});
 
-	var Menu = function() {};
+	var Menu = function() {
+		this.min_height = '50px';
+		this.max_height = '380px';
+		this.speed		= 600;
+	};
 
 	Menu.prototype = {
 		animateMenu: function(items) {
-			var min_height = '50px',
-				max_height = '380px',
-				speed	   = 600;
-				
+			var speed 		= this.speed,
+				max_height	= this.max_height,
+				min_height	= this.min_height;
+
 			for (var i = 0; i < items.length; i++) {
 
 				var item   = $(items[i]),

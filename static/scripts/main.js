@@ -30,16 +30,14 @@
 
 	});
 
-	function Menu() {
+	var Menu = function() {};
 
-		this.animateMenu = function(items) {
-
-			// Default values
-			var	min_height  = '50px',
-				max_height  = '380px',
-				speed 		= 600;
-
-			// Animate each item in array
+	Menu.prototype = {
+		animateMenu: function(items) {
+			var min_height = '50px',
+				max_height = '380px',
+				speed	   = 600;
+				
 			for (var i = 0; i < items.length; i++) {
 
 				var item   = $(items[i]),
@@ -52,34 +50,8 @@
 				}
 
 			}
-
 		}
-	}
-
-	// var Menu = function(elem) {
-	// 	this.elem = elem;
-	// 	// this.animateMenu();
-	// };
-
-	// Menu.prototype = {
-	// 	animateMenu: function(items) {
-	// 		var min_height = '50px',
-	// 			max_height = '380px',
-	// 			speed	   = 600;
-	// 		for (var i = 0; i < items.length; i++) {
-
-	// 			var item   = $(items[i]),
-	// 				height = item.css('height');
-
-	// 			if(height == min_height) {
-	// 				item.animate({'height': max_height}, speed);
-	// 			} else {
-	// 				item.animate({'height': min_height}, speed);
-	// 			}
-				
-	// 		}
-	// 	}
-	// };
+	};
 
 }(window.jQuery, window, document));
 

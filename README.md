@@ -1,7 +1,7 @@
 francismitra
 ======
 
-Source code for [http://francismitra.com](http://francismitra.com), my personal portfolio and blog focused on photography and web development
+Source code for [http://francismitra.com](http://francismitra.com)
 
 Architecture
 -----

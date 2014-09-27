@@ -14,7 +14,7 @@ social.InstagramModel = Backbone.Model;
  */
 social.InstagramCollection = Backbone.Collection.extend({
 	model: social.InstagramModel,
-	url: 'http://127.0.0.1:8000/social/instagram',
+	url: '/social/instagram',
 	parse: function(response) {
 		return response;
 	},
@@ -77,7 +77,7 @@ social.InstagramView = Backbone.View.extend({
 		var media 	    = e.currentTarget,
 			media_id    = media.getAttribute('data-id'),
 			media_count = Number(media.getAttribute('data-likes')),
-			media_like  = 'http://127.0.0.1:8000/social/media_like?id=';
+			media_like  = '/social/media_like?id=';
 
 		var likeMediaSuccess = function() {
 			var count = $(media).find('.likes');

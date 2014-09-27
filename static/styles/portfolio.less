@@ -82,13 +82,15 @@ RESUME
 		}
 	}
 	h2 {
-		color: @white;
+		color: @red;
+		// color: @white;
 		display: inline-block;
 		text-transform: uppercase;
 		font-size: 20px;
-		background-color: @red;
-		padding: 0 5px;
-		margin-bottom: 20px;
+		// background-color: @red;
+		// padding: 0 5px;
+		margin: 3px 0 20px 0; // fix awkward spacing for bebas font
+		font-family: bebasregular;
 	}
 	@media @medium-screen {
 		padding-top: 20px;
@@ -123,27 +125,26 @@ RESUME
 				color: @black;
 			}
 		}
-		// @media @medium-screen {
-		// 	list-style: none;
-		// 	padding: 0;
-		// 	li {
-		// 		padding: 2px;
-		// 	}
-		// 	li:nth-child(even) {
-		// 		background-color: lighten(@light-gray, 40%);
-		// 	}
-		// 	li:nth-child(odd) {
-		// 		background-color: lighten(@light-gray, 45%);
-		// 	}
+	}
+	// @media (max-width:850px) {
+		// > div h3, 
+		// > div .date {
+		// 	float: left;
+		// 	clear: both;
 		// }
-	}
-	@media @medium-screen {
-		> h3, > span {
-			padding: 2px;
-		}
-	}
+	// }
 	h3 {
 		font-family: roboto_slabregular;
+		// float: left;
+	}
+	.date {
+		// float: right;
+		text-transform: lowercase;
+	}
+	// This is here in case you decide to float the date right
+	> div {
+		width: 100%;
+		.clearfix;
 	}
 }
 
@@ -160,5 +161,8 @@ RESUME
 	font-family: 'ralewaylight', arial, sans-serif;
 	&:first-child {
 		margin-left: 0;
+	}
+	@media @medium-screen {
+		margin: 0 5px 5px 0;
 	}
 }

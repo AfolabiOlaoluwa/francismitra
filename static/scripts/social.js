@@ -1,10 +1,9 @@
 var social = {}
 
 /*
- *
- * MODELS
- *
- */
+=================================================
+MODELS
+================================================*/
 social.InstagramModel = Backbone.Model.extend({
 	likeMedia: function(target) {
 		var target       = target,
@@ -48,10 +47,9 @@ social.InstagramModel = Backbone.Model.extend({
 });
 
 /*
- *
- * COLLECTIONS
- *
- */
+=================================================
+COLLECTIONS
+================================================*/
 social.InstagramCollection = Backbone.Collection.extend({
 	model: social.InstagramModel,
 	url: '/social/instagram',
@@ -71,15 +69,14 @@ social.InstagramCollection = Backbone.Collection.extend({
 });
 
 /*
- *
- * VIEWS
- *
- */
+=================================================
+VIEWS
+================================================*/
 social.InstagramView = Backbone.View.extend({
 	el: '#social',
 	feed: {},
 	events: {
-		'click .details': 'clickMedia'
+		'click .details': 'fireModel'
 	},
 	initialize: function() {
 		this.collection = new social.InstagramCollection();
@@ -96,7 +93,7 @@ social.InstagramView = Backbone.View.extend({
 				caption = this.feed[i].caption == null ? '' : this.feed[i].caption.text,
 				likes   = this.feed[i].likes.count,
 				id      = this.feed[i].id;
-
+			// Prep images object to dump on template
 			images[i]   = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
 		}
 
@@ -118,7 +115,7 @@ social.InstagramView = Backbone.View.extend({
 			}
 		});
 	},
-	clickMedia: function(e) {
+	fireModel: function(e) {
 		var target	    = e.currentTarget,
 			media_id    = target.getAttribute('data-id');
 

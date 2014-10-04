@@ -120,7 +120,7 @@ social.InstagramView = Backbone.View.extend({
 	},
 	clickMedia: function(e) {
 		var target	    = e.currentTarget,
-			media_id    = media.getAttribute('data-id');
+			media_id    = target.getAttribute('data-id');
 
 		var model = this.collection.findWhere({
 			id: media_id

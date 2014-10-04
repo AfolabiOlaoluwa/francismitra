@@ -12,9 +12,17 @@ a.instagram-link {
 	text-transform: uppercase;
 }
 
+#social {
+	.clearfix;
+}
+
+.social {
+	padding-bottom: 100px;
+}
+
 .instagram-wrapper {
-	width: 100%;
-	margin-bottom: 10px;
+	width: 50%;
+	float: left;
 	height: auto;
 	position: relative;
 	.instagram-hover {
@@ -47,6 +55,13 @@ a.instagram-link {
 	}
 	&:hover .instagram-hover {
 		display: block;
+	}
+	@media @large-screen {
+		width: 100%;
+		margin-bottom: 10px;
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 	@media @medium-screen {
 		.instagram-hover {

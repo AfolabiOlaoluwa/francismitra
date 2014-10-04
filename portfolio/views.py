@@ -2,6 +2,7 @@ from datetime import date
 from django.views.generic import DetailView, TemplateView
 from portfolio.models import Images, Categories, Videos
 from blog.models import Posts
+from francismitra import settings
 
 '''
 Mixin for layout template - pulls portfolio categories for menu,
@@ -23,13 +24,15 @@ class LayoutView(object):
 			'menu': Categories.objects.all().order_by('sorter'),
 			'updated_at': Posts.objects.latest('created'),
 			'year': date.today().year,
+			# handles the loading of google analytics
+			'development': settings.DEBUG
 		}
 
 		context = super(LayoutView, self).get_context_data(**kwargs)
 
 		for key in layout_content:
 			context[key] = layout_content[key]
-
+				
 		return context
 
 class IndexView(LayoutView, TemplateView):

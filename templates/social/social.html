@@ -30,3 +30,14 @@
 </section>
 
 {% endblock %}
+
+{% block js %}
+
+	{{ block.super }}
+
+	{% load compress %}
+	{% compress js %}
+	<script src="{{ STATIC_URL }}scripts/social.js"></script>
+	{% endcompress %}
+
+{% endblock %}

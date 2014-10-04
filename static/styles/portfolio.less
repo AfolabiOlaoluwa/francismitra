@@ -115,6 +115,7 @@ RESUME
 
 .experience-block {
 	margin-bottom: 20px;
+	text-align: justify;
 	ul {
 		margin: 10px 0 0 0;
 		padding-left: 20px;
@@ -141,11 +142,19 @@ RESUME
 		// float: right;
 		text-transform: lowercase;
 	}
-	// This is here in case you decide to float the date right
-	> div {
+	// This is here in case you decide to float the date later
+	.expereince-block__header {
 		width: 100%;
 		.clearfix;
 	}
+}
+
+.experience-block__context {
+	padding: 10px;
+	background-color: lighten(@light-gray, 40%);
+	// background-color: #f7f7f7;
+	margin-top: 10px;
+	// text-align: justify;
 }
 
 .skill-blocks {

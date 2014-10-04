@@ -25,6 +25,23 @@ a.instagram-link {
 	float: left;
 	height: auto;
 	position: relative;
+	.instagram-fail {
+		display: none;
+		background-color: fadeout(@red, 15%);
+		z-index: 20;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		font-family: bebasregular;
+		text-align: center;
+		text-transform: uppercase;
+		color: @white;
+		font-size: 18px;
+		letter-spacing: 2px;
+		cursor: pointer;
+	}
 	.instagram-hover {
 		display: none;
 		position: absolute;

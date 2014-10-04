@@ -7,6 +7,7 @@ media/
 static/CACHE
 migrations/
 social/config.py
+francismitra/settings.py
 
 # OS generated files
 ######################

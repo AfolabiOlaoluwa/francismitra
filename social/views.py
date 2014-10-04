@@ -4,14 +4,9 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import BaseDetailView
 from django import http
 from social.models import PersonalInstagram, AuthenticateInstagram
+from social.config import INSTAGRAM_CONFIG
 from portfolio.views import LayoutView
 
-INSTAGRAM_CONFIG = {
-	'user_id': '2968231',
-	'client_id': 'af80dd4c67de439fba77ac4c4743ead0',
-	'client_secret': '1f661d6538c44c9a83ff279bc350bb75',
-	'redirect_uri': 'http://127.0.0.1:8000/social',
-}
 
 '''
 Begin authentication to allow viewers to 'comment' and 'like' media.
@@ -48,9 +43,10 @@ class InstagramFeed(JSONResponseMixin, BaseDetailView):
 			                             INSTAGRAM_CONFIG['client_id'])
 	    
 		try: 
-			json_response = my_instagram.find_feed()
-		except Exception, e:
-			json_response = {'failed':'Unable to find feed'}
+			instagram_feed = my_instagram.find_feed()
+			json_response  = {'result':'success', 'content':instagram_feed}
+		except Exception:
+			json_response = {'result':'fail', 'content':'Failure in Django class InstagramFeed'}
 
 		context = json_response
 		return self.render_to_response(context)
@@ -73,8 +69,8 @@ class SocialView(LayoutView, TemplateView):
 			try:
 				access_token = instagram_user.find_access_token(code)
 				self.request.session['access_token'] = access_token
-			except Exception, e:
-				print 'Code not available'
+			except Exception:
+				print 'Code not available in Django class SocialView'
 
 		# Create visible button to authenticate users
 		if not self.request.session.get('access_token'):
@@ -96,11 +92,11 @@ class MediaLike(JSONResponseMixin, BaseDetailView):
 				instagram_user.like_instagram_photo(token, id)
 				json_response = {'result':'success'}
 
-			except Exception, e:
-				json_response = {'result':'fail', 'message':e}
+			except Exception:
+				json_response = {'result':'fail', 'message':'Failure in Django class MediaLike'}
 
 		else:
-			json_response = {'result':'fail', 'message':'not logged in'}
+			json_response = {'result':'fail', 'message':'Not logged in'}
 
 		context = json_response
 

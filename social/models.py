@@ -34,7 +34,7 @@ class AuthenticateInstagram(object):
 		try:
 			url = self.unauthenticated_api.get_authorize_url(scope=["likes","comments"])
 			return url
-		except Exception, e:
+		except Exception:
 			url = '#'
 			return url
 

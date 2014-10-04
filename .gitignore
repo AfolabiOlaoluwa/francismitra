@@ -6,6 +6,7 @@ venv/
 media/
 static/CACHE
 migrations/
+social/config.py
 
 # OS generated files
 ######################

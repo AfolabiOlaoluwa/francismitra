@@ -66,10 +66,14 @@ social.InstagramView = Backbone.View.extend({
 		var self = this;
 		this.collection.fetch({
 			success: function(collection, response) {
-				self.feed = response.data;
+				if(response.result == 'success') {
+					self.feed = response.content.data;
+				} else {
+					console.log(response)
+				}
 			},
 			error: function() {
-				console.log("failed to find instagram feed...");
+				console.log("Failure in BB object social.InstagramCollection");
 			}
 		});
 	},
@@ -85,7 +89,10 @@ social.InstagramView = Backbone.View.extend({
 		}
 
 		var likeMediaFail = function() {
-			// create some kind of graphic notice
+			var hover  = $(media).parent('.instagram-hover'),
+			    notice = hover.siblings('.instagram-fail');
+
+			notice.show().delay(700).fadeOut();
 		}
 
 		$.ajax({

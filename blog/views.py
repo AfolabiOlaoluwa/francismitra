@@ -5,7 +5,7 @@ from portfolio.views import LayoutView
 
 class BlogView(LayoutView, ListView):
 	template_name = 'blog/blog.html'
-	queryset = Posts.objects.exclude(category='TU')
+	queryset = Posts.objects.exclude(category='TU').order_by('-created')
 	context_object_name = 'blog_posts'
 
 	def get_context_data(self, **kwargs):
@@ -32,7 +32,7 @@ class SingleView(LayoutView, DetailView):
 
 class TutorialView(LayoutView, ListView):
 	template_name = 'blog/tutorials.html'
-	queryset = Posts.objects.exclude(category='DE')
+	queryset = Posts.objects.exclude(category='DE').order_by('-created')
 	context_object_name = 'tutorial_posts'
 
 	def get_context_data(self, **kwargs):

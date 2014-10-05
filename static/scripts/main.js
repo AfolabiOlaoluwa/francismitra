@@ -13,6 +13,13 @@ portfolio.DefaultView = Backbone.View.extend({
 		// Lazy load images
 		$('img.unveil').unveil();
 
+		// Check to close mobile menu if open on desktop view
+		window.addEventListener('resize', function() {
+			if(document.documentElement.clientWidth > 768) {
+				self.removeMobileStyles();
+			}
+		});
+
 		// Initialize animated menu icon
 		new svgIcon( document.querySelector( '.menu-toggle' ), 
 			svgIconConfig, { 
@@ -25,33 +32,28 @@ portfolio.DefaultView = Backbone.View.extend({
 					$('body').toggleClass('animate-body');
 					$('.mobile-menu').toggleClass('animate-body turn-white');
 					$('.mobile-shade').toggle();
-					// var nav 	  = document.querySelector('nav');
-					// 	nav_push  = document.querySelector('.nav-push'),
-					// 	toAnimate = [nav, nav_push];
-
-					// self.animateMenu(toAnimate);
 
 				}
 			} );
 	},
-	// Depreciated animation used for dropdown menu
-	animateMenu: function(items) {
-		var speed 		= 600,
-			max_height	= '380px',
-			min_height	= '50px';
+	removeMobileStyles: function() {
+		$('.mobile-shade').hide();
 
-		for (var i = 0; i < items.length; i++) {
+		var remove_classes  = ['animate-nav', 'animate-body', 'turn-white'],
+			mobile_classes  = ['nav', 'body', '.mobile-menu'];
 
-			var item   = $(items[i]),
-				height = item.css('height');
+		for (var i = 0; i < mobile_classes.length; i++) {
+			// convert to a jQuery object
+			var thisClass = $(mobile_classes[i]);
 
-			if(height == min_height) {
-				item.animate({'height': max_height}, speed);
-			} else {
-				item.animate({'height': min_height}, speed);
+			for (var c = 0; c < remove_classes.length; c++) {
+				if(thisClass.hasClass(remove_classes[c])) {
+					thisClass.removeClass(remove_classes[c]);
+				}
 			}
 
 		}
+
 	}
 });
 

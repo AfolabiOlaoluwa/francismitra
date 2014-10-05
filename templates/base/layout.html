@@ -17,13 +17,13 @@
 	</head>
 	<body>
 
-		<div class="wrapper">
+	<div class="wrapper">
+		<div class="mobile-menu clearfix{% if mobile_home %} hide-toggle{% endif %}">
+			<a class="author" href="/">Francis<strong>Mitra</strong></a>
+			<span class="menu-toggle" data-icon-name="hamburgerCross"></span>
+		</div>
+		<nav{% if mobile_home %} class="full-screen" {% endif %}>
 
-		<nav{% if mobile_home %} class="{{ mobile_home }}" {% endif %}>
-			<div class="clearfix">
-				<a class="author" href="/">Francis<strong>Mitra</strong></a>
-				<span class="menu-toggle" data-icon-name="hamburgerCross"></span>
-			</div>
 			<ul class="menu">
 			<!-- temporarily hide videos -->
 			{% for menu_items in menu|slice:"4" %}
@@ -46,7 +46,8 @@
 		</nav>
 
 		<div class="nav-push"></div>
-
+		<div class="mobile-shade"></div>
+		
 		{% block content %}
 		{% endblock %}
 
@@ -54,7 +55,7 @@
 			<span class="left"><a href="/">Francis Mitra</a> | <a target="_blank" href="https://github.com/fmitra/francismitra">Source</a></span>
 			<span class="right">&copy {{year}}</span>
 		</footer>
-		</div> <!-- .wrapper -->
+	</div> <!-- .wrapper -->
 
 		{% block js %}
 		{% load compress %}

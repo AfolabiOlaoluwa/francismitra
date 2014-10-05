@@ -1,5 +1,96 @@
 /*
 =================================================
+TOGGLED CLASSES AND MOBILE MENU
+================================================*/
+.animate-nav {
+    right: 0px !important;
+}
+
+.animate-body {
+    left: -270px !important;
+}
+
+.mobile-shade {
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	background-color: fadeout(@light-gray, 20%);
+}
+
+.turn-white {
+	// background-color: #e4e4e4 !important;
+	background-color: fadeout(@white, 70%)!important;
+	border-bottom: 0 !important;
+}
+
+.mobile-menu {
+	display: none;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 20;
+	.transition;
+	left: 0;
+	height: 60px;
+	line-height: 60px;
+	background-color: @black;
+	// background-color: fadeout(@black, 20%);
+	border-bottom: 1px solid lighten(@black, 20%);
+	.basepadding;
+	svg {
+		vertical-align: middle;
+	}
+	@media @medium-screen {
+		display: block;
+	}
+}
+
+a.author {
+	float: left;
+	text-transform: uppercase;
+	font-family: letter_gothic_medium;
+	color: #fff;
+	font-size: 18px;
+	margin-top: 2px;
+	strong {
+		font-weight: bold;
+		font-family: letter_gothic_medium;
+	}
+}
+
+.menu-toggle {
+	float: right;
+	cursor: pointer;
+}
+
+// Animate the the body when fixed menu expands
+.nav-push {
+	width: 100%;
+	height: 60px;
+	background-color: @black;
+	display: none;
+	@media @medium-screen {
+		display: block;
+	}
+}
+
+@media @medium-screen {
+	nav.full-screen {
+		height: 100%;
+		right: 0;
+		width: 100%;
+	}
+	.hide-toggle {
+		display: none;
+	}
+}
+
+/*
+=================================================
 NAVIGATION, HEADER, FOOTER
 ================================================*/
 nav {
@@ -11,41 +102,22 @@ nav {
 	max-width: @max-width;
 	height: @portfolio-height;
 	.portfolio_responses();
-	> div {
-		display: none;
-		height: 50px;
-		line-height: 50px;
-		background-color: fadeout(@black, 20%);
-		border-bottom: 1px solid lighten(@black, 20%);
-		.basepadding;
-		@media @medium-screen {
-			display: block;
-		}
-		svg {
-			vertical-align: middle;
-		}
-	}
 	@media (max-width: 1200px) {
 		max-width: 1000px;
 	}
-	@media (max-width: 950px) {
-		// max-width: 850px;
-	}
 	@media @medium-screen {
 		z-index: 4; 
-		width: 100%;
-		border-bottom: 1px solid lighten(@black, 20%);
-		// background-color: darken(@gray, 20%);
-		background-color: fadeout(@black, 15%);
 		top: 0;
-		left: 0;
-		height: 50px;
 		overflow: hidden;
+		right: -270px;
+		height: 100%;
+		width: 270px;
+		background-color: @black;
+		.transition;
 	}
 	> ul.aside, ul.menu {
 		list-style: none;
-		height: @portfolio-height; // declare height because of JS nav animation
-		// height: 100%;
+		height: 100%;
 		width: 170px;
 		float: right;
 		font-size: @xlarge-font;
@@ -87,7 +159,6 @@ nav {
 	> ul.menu {
 		background-color: fadeout(@white, 30%);
 		margin: 0;
-		// margin: 0 20px 0 0;
 		text-transform: uppercase;
 		@media (max-width:1200px) {
 			margin-right: 20px;
@@ -97,39 +168,16 @@ nav {
 			background-color: transparent;
 			text-align: right;
 			width: 100%;
-			font-size: @large-font;
 			margin: 0;
-			padding: 0;
-			// padding: 40px 0;
+			padding: 10px;
+			font-size: 28px;
+			@media (max-height: 460px) {
+				font-size: 25px;
+			}
+			@media (max-height: 372px) {
+				font-size: 20px;
+			}
 		}
-	}
-}
-
-a.author {
-	float: left;
-	text-transform: uppercase;
-	font-family: letter_gothic_medium;
-	color: #fff;
-	font-size: 16px;
-	margin-top: 2px;
-	strong {
-		font-weight: bold;
-		font-family: letter_gothic_medium;
-	}
-}
-
-.menu-toggle {
-	float: right;
-	cursor: pointer;
-}
-
-// Animate the the body when fixed menu expands
-.nav-push {
-	width: 100%;
-	height: 50px;
-	display: none;
-	@media @medium-screen {
-		display: block;
 	}
 }
 
@@ -137,7 +185,6 @@ a.author {
 	font-size: @small-font;
 	text-transform: none;
 	color: @red;
-	// color: #9d0cb7;
 	font-family: josefin_sansthin;
 	font-style: italic;
 	@media @medium-screen {
@@ -145,33 +192,8 @@ a.author {
 	}
 }
 
-@media @medium-screen {
-	nav.mobile_home {
-		height: 100%;
-		> div {
-			display: none;
-		}
-		background-color: @black;
-		ul li {
-			// Mobil XL
-			font-size: 35px;
-			// 460px (iPhone 5)
-			@media (max-height: 460px) {
-				font-size: 33px;
-			}
-			// 372px (iPhone 4)
-			@media (max-height: 372px) {
-				font-size: 25px;
-			}
-		}
-	}
-}
-
 footer {
 	position: fixed;
-	// font-family: 'letter_gothic_medium', arial, sans-serif;
-	// font-family: 'roboto_slablight', arial, sans-serif;
-	// font-family: 'ralewaylight', arial, sans-serif;
 	z-index: 5;
 	bottom: 0;
 	left: 0;
@@ -180,22 +202,12 @@ footer {
 	height: 40px;
 	line-height: 40px;
 	background-color: @white;
-	// background-color: fadeout(@white, 50%);
 	color: darken(@white, 60%);
 	border-top: 1px solid darken(@white, 10%);
 	a {
 		color: darken(@white, 60%);
 	}
 	@media @medium-screen {
-		display: none; // maybe
-		background-color: @black;
-		color: @white;
-		border-top: 1px solid lighten(@black, 20%);
-		.basepadding;
-		height: 30px;
-		line-height: 30px;
-		> a {
-			display: none;
-		}
+		display: none; 
 	}
 }

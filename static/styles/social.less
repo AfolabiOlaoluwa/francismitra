@@ -10,6 +10,12 @@ a.instagram-link {
 	padding: 20px;
 	text-align: center;
 	text-transform: uppercase;
+	@media @medium-screen {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 3;
+	}
 }
 
 #social {
@@ -18,6 +24,9 @@ a.instagram-link {
 
 .social {
 	padding-bottom: 100px;
+	@media @medium-screen {
+		padding-top: 70px;
+	}
 }
 
 .instagram-wrapper {

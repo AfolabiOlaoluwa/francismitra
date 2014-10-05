@@ -21,15 +21,20 @@ portfolio.DefaultView = Backbone.View.extend({
 				size		: { w : 35, h : 35 },
 				onToggle	: function() {
 
-					var nav 	  = document.querySelector('nav');
-						nav_push  = document.querySelector('.nav-push'),
-						toAnimate = [nav, nav_push];
+					$('nav').toggleClass('animate-nav');
+					$('body').toggleClass('animate-body');
+					$('.mobile-menu').toggleClass('animate-body turn-white');
+					$('.mobile-shade').toggle();
+					// var nav 	  = document.querySelector('nav');
+					// 	nav_push  = document.querySelector('.nav-push'),
+					// 	toAnimate = [nav, nav_push];
 
-					self.animateMenu(toAnimate);
+					// self.animateMenu(toAnimate);
 
 				}
 			} );
 	},
+	// Depreciated animation used for dropdown menu
 	animateMenu: function(items) {
 		var speed 		= 600,
 			max_height	= '380px',

@@ -41,7 +41,7 @@ class IndexView(LayoutView, TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(IndexView, self).get_context_data(**kwargs)
 		context['aside'] = ['abstract&', 'love&', 'fashion&', 'travel&']
-		context['mobile_home'] = 'mobile_home'
+		context['mobile_home'] = True 
 		return context
 
 class CategoryView(LayoutView, DetailView):

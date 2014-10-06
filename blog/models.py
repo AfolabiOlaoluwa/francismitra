@@ -2,7 +2,7 @@ from django.db import models
 
 class Posts(models.Model):
 	title   		= models.CharField(max_length=250, blank=True, null=True)
-	content 		= models.TextField()
+	content 		= models.TextField(blank=True, null=True)
 	created 		= models.DateTimeField(auto_now_add=True)
 	CATEGORY_LIST 	= (('TU', 'Tutorials'),('DE','Default'))
 	category 	    = models.CharField(max_length=2, choices=CATEGORY_LIST)

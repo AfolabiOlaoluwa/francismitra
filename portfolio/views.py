@@ -4,21 +4,11 @@ from portfolio.models import Images, Categories, Videos
 from blog.models import Posts
 from francismitra import settings
 
-'''
+"""
 Mixin for layout template - pulls portfolio categories for menu,
 current year for footer, and date of latest blog update
-'''
+"""
 class LayoutView(object):
-	# @property
-	# def get_layout_content(self):
-	# 	layout_content = {
-	# 		'menu': Categories.objects.all().order_by('sorter'),
-	# 		'updated_at': Posts.objects.latest('created'),
-	# 		'year': date.today().year,
-	# 	}
-
-	# 	return layout_content
-
 	def get_context_data(self, **kwargs):
 		layout_content = {
 			'menu': Categories.objects.all().order_by('sorter'),

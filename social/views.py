@@ -8,11 +8,11 @@ from social.config import INSTAGRAM_CONFIG
 from portfolio.views import LayoutView
 
 
-'''
+"""
 Begin authentication to allow viewers to 'comment' and 'like' media.
 Authentication is completed after user requests access token through
 class SocialView and verified through checking session['access_token']
-'''
+"""
 instagram_user = AuthenticateInstagram(INSTAGRAM_CONFIG['client_id'], 
 	                                   INSTAGRAM_CONFIG['client_secret'], 
 	                                   INSTAGRAM_CONFIG['redirect_uri'])
@@ -32,11 +32,11 @@ class JSONResponseMixin(object):
 	def convert_context_to_json(self, context):
 		return json.dumps(context)
 
-'''
+"""
 Personal Instagram feed rendered as JSON response.
 Does not require authentication and is an instance of
 a separate model
-'''		
+"""	
 class InstagramFeed(JSONResponseMixin, BaseDetailView):
 	def get(self, request, *args, **kwargs):
 		my_instagram = PersonalInstagram(INSTAGRAM_CONFIG['user_id'], 
@@ -51,10 +51,10 @@ class InstagramFeed(JSONResponseMixin, BaseDetailView):
 		context = json_response
 		return self.render_to_response(context)
 
-'''
+"""
 Allow visitors the option to connect via
 the API to perform authenticated actions on model PersonalInstagram
-'''
+"""
 class SocialView(LayoutView, TemplateView):
 	template_name = 'social/social.html'
 
@@ -78,9 +78,9 @@ class SocialView(LayoutView, TemplateView):
 
 		return context
 
-'''
+"""
 Allow authenticated users to 'like' personal Instagram feed
-'''
+"""
 class MediaLike(JSONResponseMixin, BaseDetailView):
 	def get(self, request, *args, **kwargs):
 		if self.request.session.get('access_token'):

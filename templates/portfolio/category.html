@@ -2,7 +2,7 @@
 {% block content %}
 
 <section class="portfolio">
-{% for image in categories.get_images %}
+{% for image in categories.images_set.all %}
 	<img class="unveil" src="{{ STATIC_URL }}media/loading.gif" data-src="{{ image.photo.url }}" alt="">
 	<div class="row">
 		{% if image.caption %}

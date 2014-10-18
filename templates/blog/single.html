@@ -4,7 +4,7 @@
 <section class="page single">
 	<h1>{{ posts.title }}</h1>
 	<p>{{ posts.content|safe }}</p>
-	{% for image in posts.get_images %}
+	{% for image in posts.postimages_set.all %}
 	<img src="{{ image.photo.url }}" alt="">
 	{% endfor %}
 </section>

@@ -106,6 +106,7 @@ social.InstagramView = Backbone.View.extend({
 			success: function(collection, response) {
 				if(response.result == 'success') {
 					self.feed = response.content.data;
+					console.log(response);
 				} else {
 					console.log(response)
 				}

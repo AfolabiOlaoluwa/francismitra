@@ -37,7 +37,7 @@ class IndexView(LayoutView, TemplateView):
 class CategoryView(LayoutView, DetailView):
 	template_name = 'portfolio/category.html'
 	model = Categories
-	
+
 	def get_context_data(self, **kwargs):
 		context = super(CategoryView, self).get_context_data(**kwargs)
 		context['page_title'] = 'Portfolio | %s' % (self.get_object().title)

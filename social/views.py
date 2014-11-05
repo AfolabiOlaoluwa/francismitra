@@ -1,7 +1,6 @@
 import json
 from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.views.generic.detail import BaseDetailView
+from django.views.generic import TemplateView, View
 from django import http
 from social.models import PersonalInstagram, AuthenticateInstagram
 from social.config import INSTAGRAM_CONFIG
@@ -37,7 +36,7 @@ Personal Instagram feed rendered as JSON response.
 Does not require authentication and is an instance of
 a separate model
 """	
-class InstagramFeed(JSONResponseMixin, BaseDetailView):
+class InstagramFeed(JSONResponseMixin, View):
 	def get(self, request, *args, **kwargs):
 		my_instagram = PersonalInstagram(INSTAGRAM_CONFIG['user_id'], 
 			                             INSTAGRAM_CONFIG['client_id'])
@@ -84,13 +83,13 @@ class SocialView(LayoutView, TemplateView):
 """
 Allow authenticated users to 'like' personal Instagram feed
 """
-class MediaLike(JSONResponseMixin, BaseDetailView):
+class MediaLike(JSONResponseMixin, View):
 	def get(self, request, *args, **kwargs):
 		if self.request.session.get('access_token'):
 			token = self.request.session.get('access_token');
 
 			id = self.request.GET.get('id')
-			
+
 			try: 
 				status = instagram_user.media_check(token, id)
 

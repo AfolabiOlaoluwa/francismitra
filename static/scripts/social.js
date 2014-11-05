@@ -61,14 +61,6 @@ social.InstagramCollection = Backbone.Collection.extend({
 	parse: function(response) {
 		// Instagram model collection is returned under data
 		return response.content.data;
-	},
-	sync: function(method, model, options) {
-		var params = _.extend({
-			type: 'GET',
-            dataType: 'json',
-            url: this.url,
-		}, options);
-		return $.ajax(params);
 	}
 });
 
@@ -102,8 +94,6 @@ social.InstagramView = Backbone.View.extend({
 	render: function() {
 		var images = {};
 
-		// var models = this.collection.models;
-
 		// Parse Instagram collection
 		for(var i = 0; i < this.cache.length; i++) {
 			var photo   = this.cache[i].images.standard_resolution.url,
@@ -129,7 +119,7 @@ social.InstagramView = Backbone.View.extend({
 			success: function(collection, response) {
 				if(response.result == 'success') {
 
-					// Store an reference of the most recently retrieved models
+					// Store a reference of the most recently retrieved models
 					self.cache = response.content.data;
 
 					var max_id = response.content.pagination.next_max_id;

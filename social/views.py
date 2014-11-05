@@ -42,14 +42,17 @@ class InstagramFeed(JSONResponseMixin, BaseDetailView):
 		my_instagram = PersonalInstagram(INSTAGRAM_CONFIG['user_id'], 
 			                             INSTAGRAM_CONFIG['client_id'])
 	    
+		max_id = request.GET.get('max_id', '')
+
 		try: 
-			instagram_feed = my_instagram.find_feed()
+			instagram_feed = my_instagram.find_feed(max_id)
 			json_response  = {'result':'success', 'content':instagram_feed}
 		except Exception:
 			json_response = {'result':'fail', 'content':'Failure in Django class InstagramFeed'}
 
 		context = json_response
 		return self.render_to_response(context)
+
 
 """
 Allow visitors the option to connect via

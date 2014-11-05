@@ -1,33 +1,38 @@
 {% extends "base/layout.html" %}
 {% block content %}
 
-<section class="page social">
+<section id="social" class="page social">
+
 	{% if link %}
 	<a class="instagram-link" href="{{link}}">Connect with Instagram</a>
 	{% endif %}
-	<div id="social">
-		<script type="text/template" id="instagram-template">
-		<% _.each(collection, function(item) { %>
-			<div class="instagram-wrapper">
-				<div class="instagram-fail">
-					<div class="outercontainer"><div class="innercontainer">
-						<span>Not Logged In</span>
-					</div></div>
-				</div>
-				<div class="instagram-hover">
-					<div class="details" data-id="<%= item.id %>" data-likes="<%= item.likes %>">
-						<div class="outercontainer"><div class="innercontainer">
-							<span class="likes"><%= item.likes %></span> <span class="hearts">&hearts;</span><br>
-							<span class="caption"><%= item.caption %></span>
-						</div></div>
-					</div>
-				</div>
-				<img src="<%= item.photo %>" data-id="<%= item.id %>" data-caption="<%= item.caption %>" data-likes="<%= item.likes %>">
-				</div>
-		<% }); %>
-		</script>
+	<div id="instagram-block">	
 	</div>
+
+	<div id="load-more"></div>
+
 </section>
+
+<script type="text/template" id="instagram-template">
+<% _.each(collection, function(item) { %>
+	<div class="instagram-wrapper">
+		<div class="instagram-fail">
+			<div class="outercontainer"><div class="innercontainer">
+				<span>Not Logged In</span>
+			</div></div>
+		</div>
+		<div class="instagram-hover">
+			<div class="details" data-id="<%= item.id %>" data-likes="<%= item.likes %>">
+				<div class="outercontainer"><div class="innercontainer">
+					<span class="likes"><%= item.likes %></span> <span class="hearts">&hearts;</span><br>
+					<span class="caption"><%= item.caption %></span>
+				</div></div>
+			</div>
+		</div>
+		<img src="<%= item.photo %>" data-id="<%= item.id %>" data-caption="<%= item.caption %>" data-likes="<%= item.likes %>">
+		</div>
+<% }); %>
+</script>
 
 {% endblock %}
 

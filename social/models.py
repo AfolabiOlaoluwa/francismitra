@@ -8,9 +8,15 @@ class PersonalInstagram(object):
 		self.user_id   = user_id
 		self.client_id = client_id
 
-	def find_feed(self):
+	def find_feed(self, max_id=''):
+
+		"""
+		max_id is an empty string by default in order to
+		to pull the most recent instagram items and paginate later
+		"""
+
 		# Consume feed without authorization
-		url      = 'https://api.instagram.com/v1/users/%s/media/recent/?client_id=%s' % (self.user_id, self.client_id)
+		url      = 'https://api.instagram.com/v1/users/%s/media/recent/?max_id=%s&client_id=%s' % (self.user_id, max_id, self.client_id)
 		response = urllib2.urlopen(url)
 		data     = json.load(response)
 

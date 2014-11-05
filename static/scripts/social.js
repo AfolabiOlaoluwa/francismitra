@@ -62,7 +62,6 @@ social.InstagramCollection = Backbone.Collection.extend({
 			type: 'GET',
             dataType: 'json',
             url: this.url,
-            processData: false
 		}, options);
 		return $.ajax(params);
 	}
@@ -74,9 +73,10 @@ VIEWS
 ================================================*/
 social.InstagramView = Backbone.View.extend({
 	el: '#social',
-	feed: {},
+	query: {},
 	events: {
-		'click .details': 'fireModel'
+		'click .details': 'fireModel',
+		'click #load-more': 'fetchData'
 	},
 	initialize: function() {
 		this.collection = new social.InstagramCollection();
@@ -84,29 +84,49 @@ social.InstagramView = Backbone.View.extend({
 		this.collection.on('sync', this.render, this);
 
 		this.fetchData();
+
+		// Trigger a click event to auto load on scroll
+		$(window).scroll(function() {
+		   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+		   		$('#load-more').trigger('click');
+		   }
+		});
+
 	},
 	render: function() {
 		var images = {};
 
-		for(var i = 0; i < this.feed.length; i++) {
-			var photo   = this.feed[i].images.standard_resolution.url,
-				caption = this.feed[i].caption == null ? '' : this.feed[i].caption.text,
-				likes   = this.feed[i].likes.count,
-				id      = this.feed[i].id;
+		var models = this.collection.models;
+
+		// Parse Instagram collection
+		for(var i = 0; i < models.length; i++) {
+			var photo   = models[i].attributes.images.standard_resolution.url,
+				caption = models[i].attributes.caption == null ? '' : models[i].attributes.caption.text,
+				likes   = models[i].attributes.likes.count,
+				id      = models[i].attributes.id;
+
 			// Prep images object to dump on template
 			images[i]   = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
 		}
 
-		var template = _.template($('#instagram-template').html());
-		this.$el.html(template({ collection: images }));
+		var holder 	 = $('#instagram-block'),
+		    template = _.template($('#instagram-template').html());
+
+		holder.append(template({ collection: images }));
+
 	},
 	fetchData: function() {
 		var self = this;
 		this.collection.fetch({
+			data: self.query,
 			success: function(collection, response) {
 				if(response.result == 'success') {
-					self.feed = response.content.data;
-					console.log(response);
+
+					var max_id = response.content.pagination.next_max_id;
+					self.query = {'max_id':max_id};
+
+					// console.log(collection);
+
 				} else {
 					console.log(response)
 				}
@@ -125,7 +145,7 @@ social.InstagramView = Backbone.View.extend({
 		});
 
 		model.likeMedia(target);
-	}
+	},
 });
 
 social.instagramview = new social.InstagramView;

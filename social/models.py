@@ -2,6 +2,7 @@ import urllib2
 import json
 from django.db import models
 from instagram import client
+from instagram.models import Media
 
 class PersonalInstagram(object):
 	def __init__(self, user_id, client_id):
@@ -55,6 +56,7 @@ class AuthenticateInstagram(object):
 		# Why doesn't the API's media method return a response?
 		# api = client.InstagramAPI(access_token=token)
 		# response = api.media(media_id=id)
+
 		url = 'https://api.instagram.com/v1/media/%s?access_token=%s' % (id, token)
 		response = urllib2.urlopen(url)
 		data = json.load(response)

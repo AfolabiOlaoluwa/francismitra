@@ -16,21 +16,10 @@ social.InstagramModel = Backbone.Model.extend({
 				media_count  = $target.data('likes'),
 				status 		 = status;
 
-			if(status == false) {
-				count.text(media_count+1);
-				var new_count = Number(count.text());
+			status == false ? count.text(media_count+1) : count.text(media_count-1);
 
+			var new_count   = Number(count.text()),
 				media_count = $target.data('likes', new_count);
-				// media_count = $target.attr('data-likes', new_count);
-			} else {
-				count.text(media_count-1);
-				var new_count = Number(count.text());
-				
-				media_count = $target.data('likes', new_count);
-				// media_count = $target.attr('data-likes', new_count);
-			}
-
-
 		}
 
 		var likeMediaFail = function(target) {

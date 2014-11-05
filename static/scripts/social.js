@@ -8,14 +8,29 @@ social.InstagramModel = Backbone.Model.extend({
 	likeMedia: function(target) {
 		var target       = target,
 			media_id     = this.attributes.id,
-			media_count = this.attributes.likes.count,
-			media_like   = '/social/media_like?id=';
+			media_like   = '/social/media_like';
 
-		var likeMediaSuccess = function(target) {
-			var target = target,
-				count  = $(target).find('.likes');
+		var likeMediaSuccess = function(target, status) {
+			var $target 	 = $(target),
+				count  		 = $target.find('.likes'),
+				media_count  = $target.data('likes'),
+				status 		 = status;
 
-			count.text(media_count+1);
+			if(status == false) {
+				count.text(media_count+1);
+				var new_count = Number(count.text());
+
+				media_count = $target.data('likes', new_count);
+				// media_count = $target.attr('data-likes', new_count);
+			} else {
+				count.text(media_count-1);
+				var new_count = Number(count.text());
+				
+				media_count = $target.data('likes', new_count);
+				// media_count = $target.attr('data-likes', new_count);
+			}
+
+
 		}
 
 		var likeMediaFail = function(target) {
@@ -29,10 +44,11 @@ social.InstagramModel = Backbone.Model.extend({
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
-			url: media_like+media_id,
+			url: media_like,
+			data: {'id':media_id},
 			success: function(data) {
 				if(data.result == 'success') {
-					likeMediaSuccess(target);
+					likeMediaSuccess(target, data.previously_liked);
 				} else if (data.result == 'fail') {
 					console.log(data);
 					likeMediaFail(target);
@@ -114,7 +130,7 @@ social.InstagramView = Backbone.View.extend({
 		    template = _.template($('#instagram-template').html());
 
 		holder.append(template({ collection: images }));
-		
+
 	},
 	fetchData: function() {
 		var self = this;

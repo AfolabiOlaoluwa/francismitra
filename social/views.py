@@ -90,10 +90,11 @@ class MediaLike(JSONResponseMixin, BaseDetailView):
 			token = self.request.session.get('access_token');
 
 			id = self.request.GET.get('id')
-
+			
 			try: 
-				instagram_user.like_instagram_photo(token, id)
-				json_response = {'result':'success'}
+				status = instagram_user.media_check(token, id)
+
+				json_response = {'result':'success', 'previously_liked':status}
 
 			except Exception:
 				json_response = {'result':'fail', 'message':'Failure in Django class MediaLike'}

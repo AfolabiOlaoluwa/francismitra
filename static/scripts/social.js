@@ -8,14 +8,18 @@ social.InstagramModel = Backbone.Model.extend({
 	likeMedia: function(target) {
 		var target       = target,
 			media_id     = this.attributes.id,
-			media_count = this.attributes.likes.count,
-			media_like   = '/social/media_like?id=';
+			media_like   = '/social/media_like';
 
-		var likeMediaSuccess = function(target) {
-			var target = target,
-				count  = $(target).find('.likes');
+		var likeMediaSuccess = function(target, status) {
+			var $target 	 = $(target),
+				count  		 = $target.find('.likes'),
+				media_count  = $target.data('likes'),
+				status 		 = status;
 
-			count.text(media_count+1);
+			status == false ? count.text(media_count+1) : count.text(media_count-1);
+
+			var new_count   = Number(count.text()),
+				media_count = $target.data('likes', new_count);
 		}
 
 		var likeMediaFail = function(target) {
@@ -29,10 +33,11 @@ social.InstagramModel = Backbone.Model.extend({
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
-			url: media_like+media_id,
+			url: media_like,
+			data: {'id':media_id},
 			success: function(data) {
 				if(data.result == 'success') {
-					likeMediaSuccess(target);
+					likeMediaSuccess(target, data.previously_liked);
 				} else if (data.result == 'fail') {
 					console.log(data);
 					likeMediaFail(target);
@@ -56,15 +61,6 @@ social.InstagramCollection = Backbone.Collection.extend({
 	parse: function(response) {
 		// Instagram model collection is returned under data
 		return response.content.data;
-	},
-	sync: function(method, model, options) {
-		var params = _.extend({
-			type: 'GET',
-            dataType: 'json',
-            url: this.url,
-            processData: false
-		}, options);
-		return $.ajax(params);
 	}
 });
 
@@ -74,9 +70,11 @@ VIEWS
 ================================================*/
 social.InstagramView = Backbone.View.extend({
 	el: '#social',
-	feed: {},
+	query: {},
+	cache: {},
 	events: {
-		'click .details': 'fireModel'
+		'click .details': 'fireModel',
+		'click #load-more': 'fetchData'
 	},
 	initialize: function() {
 		this.collection = new social.InstagramCollection();
@@ -84,28 +82,51 @@ social.InstagramView = Backbone.View.extend({
 		this.collection.on('sync', this.render, this);
 
 		this.fetchData();
+
+		// Trigger a click event to auto load on scroll
+		$(window).scroll(function() {
+		   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+		   		$('#load-more').trigger('click');
+		   }
+		});
+
 	},
 	render: function() {
 		var images = {};
 
-		for(var i = 0; i < this.feed.length; i++) {
-			var photo   = this.feed[i].images.standard_resolution.url,
-				caption = this.feed[i].caption == null ? '' : this.feed[i].caption.text,
-				likes   = this.feed[i].likes.count,
-				id      = this.feed[i].id;
+		// Parse Instagram collection
+		for(var i = 0; i < this.cache.length; i++) {
+			var photo   = this.cache[i].images.standard_resolution.url,
+				caption = this.cache[i].caption == null ? '' : this.cache[i].caption.text,
+				likes   = this.cache[i].likes.count,
+				id      = this.cache[i].id;
+
 			// Prep images object to dump on template
 			images[i]   = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
 		}
 
-		var template = _.template($('#instagram-template').html());
-		this.$el.html(template({ collection: images }));
+		var holder 	 = $('#instagram-block'),
+		    template = _.template($('#instagram-template').html());
+
+		holder.append(template({ collection: images }));
+
 	},
 	fetchData: function() {
 		var self = this;
 		this.collection.fetch({
+			remove: false,
+			data: self.query,
 			success: function(collection, response) {
 				if(response.result == 'success') {
-					self.feed = response.content.data;
+
+					// Store a reference of the most recently retrieved models
+					self.cache = response.content.data;
+
+					var max_id = response.content.pagination.next_max_id;
+					self.query = {'max_id':max_id};
+
+					// console.log(response.content.data);
+
 				} else {
 					console.log(response)
 				}
@@ -124,7 +145,7 @@ social.InstagramView = Backbone.View.extend({
 		});
 
 		model.likeMedia(target);
-	}
+	},
 });
 
 social.instagramview = new social.InstagramView;

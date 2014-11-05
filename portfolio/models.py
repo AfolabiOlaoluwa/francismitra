@@ -21,9 +21,9 @@ class Categories(models.Model):
 		else:
 			return "nothing is here"
 
-'''
+"""
 Base class for use with video and photo content
-'''
+"""
 class BaseMedia(models.Model):
 	category 	= models.ForeignKey(Categories)
 	title   	= models.CharField(max_length=250)
@@ -35,7 +35,6 @@ class BaseMedia(models.Model):
 
 class Images(BaseMedia):
 	photo = models.ImageField(upload_to='portfolio/')
-	# photo = models.ImageField(upload_to='images/')
 
 	class Meta:
 		verbose_name_plural = 'images'

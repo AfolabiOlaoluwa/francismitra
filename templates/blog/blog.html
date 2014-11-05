@@ -4,7 +4,7 @@
 <section class="page blog">
 	{% for posts in blog_posts %}
 
-	{% for images in posts.get_images %}
+	{% for images in posts.postimages_set.all %}
 	<img class="blog_images unveil" src="{{ STATIC_URL }}media/loading.gif"  data-src="{{ images.photo.url }}" alt="">
 	{% endfor %}
 

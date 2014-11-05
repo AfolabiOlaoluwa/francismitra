@@ -5,7 +5,7 @@
 	{% for posts in tutorial_posts %}
 	<div class="col-10">
 		<div class="row">
-			{% for images in posts.get_images|slice:"1" %}
+			{% for images in posts.postimages_set.all|slice:"1" %}
 			<img src="{{ images.photo.url }}" alt="">
 			{% endfor %}
 			<div class="title-block"><a href="{% url 'blog:blog_single' posts.slug %}"><h2>{{posts.title}}</h2></a></div>

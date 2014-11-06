@@ -82,14 +82,6 @@ social.InstagramView = Backbone.View.extend({
 		this.collection.on('sync', this.render, this);
 
 		this.fetchData();
-
-		// Trigger a click event to auto load on scroll
-		$(window).scroll(function() {
-		   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-		   		$('#load-more').trigger('click');
-		   }
-		});
-
 	},
 	render: function() {
 		var images = {};

@@ -2,6 +2,9 @@ var portfolio = {}
 
 portfolio.DefaultView = Backbone.View.extend({
 	el: 'body',
+	events: { 
+		'click .mobile-shade': 'closeMenu'
+	},
 	initialize: function() {
 		var self = this;
 
@@ -35,6 +38,9 @@ portfolio.DefaultView = Backbone.View.extend({
 
 				}
 			} );
+	},
+	closeMenu: function() {
+		$('.menu-toggle').trigger('click');
 	},
 	removeMobileStyles: function() {
 		$('.mobile-shade').hide();

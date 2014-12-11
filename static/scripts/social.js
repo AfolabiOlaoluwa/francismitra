@@ -7,21 +7,24 @@ MODELS
 social.InstagramModel = Backbone.Model.extend({
 	likeMedia: function(model, target) {
 
-		var model = model;
-		var media_like = '/social/media_like';
+		var model      = model,
+			target     = target,
+			media_like = '/social/media_like';
+
 		var media_id = model.get('id');
-		var target = target;
 
 		var likeMediaSuccess = function(model, status) {
-			var status = status;
-			var model = model;
+
+			var status = status,
+				model  = model;
 
 			// Dealing with Backbone's sync issues on nested fields 
 			var clonedModel = _.clone(model.get('likes'));
 
-			status == false ?  clonedModel.count + 1 : clonedModel.count - 1;
+			status == false ? clonedModel.count + 1 : clonedModel.count - 1;
 
 			model.set('likes', clonedModel);
+
 		}
 
 		var likeMediaFail = function(target) {
@@ -39,7 +42,6 @@ social.InstagramModel = Backbone.Model.extend({
 			data: {'id':media_id},
 			success: function(data) {
 				if(data.result == 'success') {
-					// console.log(data);
 					likeMediaSuccess(model, data.previously_liked);
 				} else if (data.result == 'fail') {
 					// console.log(data);
@@ -74,13 +76,12 @@ social.InstagramCollection = Backbone.Collection.extend({
 			success: function(collection, response) {
 				if(response.result == 'success') {
 
-					// Store a reference of the most recently retrieved models
-					self.cache = response.content.data;
+					// Reset cache to prevent repeated models during pagination
+					self.cache = new social.InstagramCollection(response.content.data);
+					console.log(self.cache);
 
 					var max_id = response.content.pagination.next_max_id;
 					self.query = {'max_id':max_id};
-
-					// console.log(response.content.data);
 
 				} else {
 					console.log(response)
@@ -113,23 +114,24 @@ social.InstagramView = Backbone.View.extend({
 	},
 	render: function() {
 
-		var images = {};
-
-		// Parse Instagram collection
-		for(var i = 0; i < this.collection.cache.length; i++) {
-			var photo   = this.collection.cache[i].images.standard_resolution.url,
-				caption = this.collection.cache[i].caption == null ? '' : this.collection.cache[i].caption.text,
-				likes   = this.collection.cache[i].likes.count,
-				id      = this.collection.cache[i].id;
-
-			// Prep images object to dump on template
-			images[i]   = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
-		}
-
 		var holder 	 = $('#instagram-block'),
 		    template = _.template($('#instagram-template').html());
 
-		holder.append(template({ collection: images }));
+		// Check for null captions for template output
+		for(var i = 0; i < this.collection.cache.models.length; i++) {
+			if(this.collection.cache.models[i].attributes.caption == null) {
+
+				var cloned = _.clone(this.collection.cache.models[i].get('caption'));
+
+				cloned = {};
+				cloned.text = '';
+
+				this.collection.cache.models[i].set('caption', cloned);
+
+			}
+		}
+
+		holder.append(template({ collection: this.collection.cache.models }));
 
 	},
 	fetchCollection: function() {
@@ -143,8 +145,8 @@ social.InstagramView = Backbone.View.extend({
 			id: media_id
 		});
 
-		model.likeMedia(model, target);
-
+		// model.likeMedia(model, target);
+		console.log(model);
 	},
 });
 

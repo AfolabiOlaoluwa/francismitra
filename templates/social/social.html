@@ -22,14 +22,14 @@
 			</div></div>
 		</div>
 		<div class="instagram-hover">
-			<div class="details" data-id="<%= item.id %>" data-likes="<%= item.likes %>">
+			<div class="details" data-id="<%= item.id %>">
 				<div class="outercontainer"><div class="innercontainer">
-					<span class="likes"><%= item.likes %></span> <span class="hearts">&hearts;</span><br>
-					<span class="caption"><%= item.caption %></span>
+					<span class="likes"><%= item.attributes.likes.count %></span> <span class="hearts">&hearts;</span><br>
+					<span class="caption"><%= item.attributes.caption.text %></span>
 				</div></div>
 			</div>
 		</div>
-		<img src="<%= item.photo %>" data-id="<%= item.id %>" data-caption="<%= item.caption %>" data-likes="<%= item.likes %>">
+		<img src="<%= item.attributes.images.standard_resolution.url %>" data-id="<%= item.id %>">
 		</div>
 <% }); %>
 </script>

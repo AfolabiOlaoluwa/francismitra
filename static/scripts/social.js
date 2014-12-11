@@ -5,50 +5,6 @@ var social = {}
 MODELS
 ================================================*/
 social.InstagramModel = Backbone.Model.extend({
-	// likeMedia: function(target) {
-	// 	var target       = target,
-	// 		media_id     = this.attributes.id,
-	// 		media_like   = '/social/media_like';
-
-	// 	var likeMediaSuccess = function(target, status) {
-	// 		var $target 	 = $(target),
-	// 			count  		 = $target.find('.likes'),
-	// 			media_count  = $target.data('likes'),
-	// 			status 		 = status;
-
-	// 		status == false ? count.text(media_count+1) : count.text(media_count-1);
-
-	// 		var new_count   = Number(count.text()),
-	// 			media_count = $target.data('likes', new_count);
-	// 	}
-
-	// 	var likeMediaFail = function(target) {
-	// 		var target = target,
-	// 			hover  = $(target).parent('.instagram-hover'),
-	// 		    notice = hover.siblings('.instagram-fail');
-
-	// 		notice.show().delay(700).fadeOut();
-	// 	}
-
-	// 	$.ajax({
-	// 		type: 'GET',
-	// 		dataType: 'json',
-	// 		url: media_like,
-	// 		data: {'id':media_id},
-	// 		success: function(data) {
-	// 			if(data.result == 'success') {
-	// 				likeMediaSuccess(target, data.previously_liked);
-	// 			} else if (data.result == 'fail') {
-	// 				console.log(data);
-	// 				likeMediaFail(target);
-	// 			}
-	// 		},
-	// 		error: function() {
-	// 			console.log("Failure in BB object social.InstagramModel");
-	// 		}
-	// 	});
-
-	// },
 	likeMedia: function(model, target) {
 
 		var model = model;
@@ -144,7 +100,6 @@ VIEWS
 social.InstagramView = Backbone.View.extend({
 	el: '#social',
 	query: {},
-	// cache: {},
 	events: {
 		'click .details': 'fireModel',
 		'click #load-more': 'fetchCollection'
@@ -157,8 +112,6 @@ social.InstagramView = Backbone.View.extend({
 		this.collection.fetchData();
 	},
 	render: function() {
-
-		// console.log(this.collection.cache);
 
 		var images = {};
 
@@ -190,7 +143,6 @@ social.InstagramView = Backbone.View.extend({
 			id: media_id
 		});
 
-		// model.likeMedia(target);
 		model.likeMedia(model, target);
 
 	},

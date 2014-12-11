@@ -2,15 +2,22 @@ import urllib2
 import json
 from django.db import models
 from instagram import client
+from instagram.models import Media
 
 class PersonalInstagram(object):
 	def __init__(self, user_id, client_id):
 		self.user_id   = user_id
 		self.client_id = client_id
 
-	def find_feed(self):
+	def find_feed(self, max_id=''):
+
+		"""
+		max_id is an empty string by default in order to
+		to pull the most recent instagram items and paginate later
+		"""
+
 		# Consume feed without authorization
-		url      = 'https://api.instagram.com/v1/users/%s/media/recent/?client_id=%s' % (self.user_id, self.client_id)
+		url      = 'https://api.instagram.com/v1/users/%s/media/recent/?max_id=%s&client_id=%s' % (self.user_id, max_id, self.client_id)
 		response = urllib2.urlopen(url)
 		data     = json.load(response)
 
@@ -45,9 +52,31 @@ class AuthenticateInstagram(object):
 		except Exception, e:
 			print e
 
+	def media_check(self, token, id):
+		# Why doesn't the API's media method return a response?
+		# api = client.InstagramAPI(access_token=token)
+		# response = api.media(media_id=id)
+
+		url = 'https://api.instagram.com/v1/media/%s?access_token=%s' % (id, token)
+		response = urllib2.urlopen(url)
+		data = json.load(response)
+
+		status = data['data']['user_has_liked']
+		
+		if status == False:
+			self.like_instagram_photo(token, id)
+		else:
+			self.unlike_instagram_photo(token, id)
+
+		return status
+
 	def like_instagram_photo(self, token, id):
 		api = client.InstagramAPI(access_token=token)
 		api.like_media(media_id=id)
+
+	def unlike_instagram_photo(self, token, id):
+		api = client.InstagramAPI(access_token=token)
+		api.unlike_media(media_id=id)
 
 
 

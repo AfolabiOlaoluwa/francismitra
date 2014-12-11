@@ -10,14 +10,42 @@ a.instagram-link {
 	padding: 20px;
 	text-align: center;
 	text-transform: uppercase;
+	@media @medium-screen {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 3;
+	}
 }
 
-#social {
+#instagram-block {
 	.clearfix;
+}
+
+#load-more {
+	width: 100%;
+	display: block;
+	background-color: @red;
+	color: @white;
+	padding: 20px;
+	text-align: center;
+	text-transform: uppercase;
+	margin-top: 20px;
+	border-radius: 30px;
+	cursor: pointer;
 }
 
 .social {
 	padding-bottom: 100px;
+	@media @medium-screen {
+		padding-top: 10px;
+	}
+}
+
+.social-push {
+	@media @medium-screen {
+		padding-top: 70px;
+	}
 }
 
 .instagram-wrapper {

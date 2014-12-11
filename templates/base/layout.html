@@ -3,24 +3,27 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="keywords" content="New York based portrait and street photographer">
-		<meta name="description" content="">
+		<meta name="keywords" content="conceptual photography, street photography, web development, new york web developer, new york photographer">
+		<meta name="description" content="New York based portrait and street photographer">
 		<title>Francis Mitra{% if page_title %} | {{ page_title }}{% endif %}</title>
 		<link rel="icon" href="{{ STATIC_URL }}media/favicon.png" type="image/png">
 		{% load compress %}
 		{% compress css %}
 		<link rel="stylesheet" href="{{ STATIC_URL }}styles/main.less" type="text/less">
 		{% endcompress %}
+		{% if not development %}
+		<script src="{{ STATIC_URL }}scripts/analytics.js"></script>
+		{% endif %}
 	</head>
 	<body>
 
-		<div class="wrapper">
+	<div class="wrapper">
+		<div class="mobile-menu clearfix{% if mobile_home %} hide-toggle{% endif %}">
+			<a class="author" href="/">Francis<strong>Mitra</strong></a>
+			<span class="menu-toggle" data-icon-name="hamburgerCross"></span>
+		</div>
+		<nav{% if mobile_home %} class="full-screen"{% endif %}>
 
-		<nav{% if mobile_home %} class="{{ mobile_home }}" {% endif %}>
-			<div class="clearfix">
-				<a class="author" href="/">Francis<strong>Mitra</strong></a>
-				<span class="menu-toggle" data-icon-name="hamburgerCross"></span>
-			</div>
 			<ul class="menu">
 			<!-- temporarily hide videos -->
 			{% for menu_items in menu|slice:"4" %}
@@ -28,7 +31,7 @@
 			{% endfor %}
 				<li><a href="/info">Info</a></li>
 				<li><a href="/resume">Resume</a></li>
-				<li><a href="{% url 'blog:tutorials' %}">Tutorials</a></li>
+				<!-- <li><a href="{% url 'blog:tutorials' %}">Tutorials</a></li> -->
 				<li><a href="/social">Social</a></li>
 				<li><a href="{% url 'blog:blog_home' %}">Blog <span class="update_date">Updated: {{updated_at.created|date:"M d"}}</span></a></li>
 			</ul>
@@ -43,7 +46,8 @@
 		</nav>
 
 		<div class="nav-push"></div>
-
+		<div class="mobile-shade"></div>
+		
 		{% block content %}
 		{% endblock %}
 
@@ -51,8 +55,9 @@
 			<span class="left"><a href="/">Francis Mitra</a> | <a target="_blank" href="https://github.com/fmitra/francismitra">Source</a></span>
 			<span class="right">&copy {{year}}</span>
 		</footer>
-		</div> <!-- .wrapper -->
+	</div> <!-- .wrapper -->
 
+		{% block js %}
 		{% load compress %}
 		{% compress js %}
 		<script src="{{ STATIC_URL }}scripts/libs/jquery.min.1.11.1.js"></script>
@@ -62,8 +67,8 @@
 		<script src="{{ STATIC_URL }}scripts/libs/jquery.unveil.js"></script>
 		<script src="{{ STATIC_URL }}scripts/libs/svg-animation.js"></script>
 		<script src="{{ STATIC_URL }}scripts/main.js"></script>
-		<script src="{{ STATIC_URL }}scripts/social.js"></script>
 		{% endcompress %}
+		{% endblock %}
 
 	</body>
 </html>

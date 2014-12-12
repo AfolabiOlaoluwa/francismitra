@@ -64,7 +64,7 @@ COLLECTIONS
 social.InstagramCollection = Backbone.Collection.extend({
 	model: social.InstagramModel,
 	cache: {},
-	quer: {},
+	query: {},
 	url: '/social/instagram',
 	parse: function(response) {
 		// Instagram model collection is returned under data

@@ -48,18 +48,18 @@ portfolio.DefaultView = Backbone.View.extend({
 		var remove_classes  = ['animate-nav', 'animate-body', 'turn-white'],
 			mobile_classes  = ['nav', 'body', '.mobile-menu'];
 
-		for (var i = 0; i < mobile_classes.length; i++) {
-			// convert to a jQuery object
-			var thisClass = $(mobile_classes[i]);
+		_.each(mobile_classes, function(mClass) {
 
-			for (var c = 0; c < remove_classes.length; c++) {
-				if(thisClass.hasClass(remove_classes[c])) {
-					thisClass.removeClass(remove_classes[c]);
+			// convert to jQuery object
+			var thisClass = $(mClass);
+
+			_.each(remove_classes, function(rClass) {
+				if(thisClass.hasClass(rClass)) {
+					thisClass.removeClass(rClass);
 				}
-			}
+			});
 
-		}
-
+		});
 	}
 });
 

@@ -14,25 +14,24 @@
 </section>
 
 <script type="text/template" id="instagram-template">
-<% _.each(collection, function(item) { %>
-	<div class="instagram-wrapper">
-		<div class="instagram-fail">
+	
+	<div class="instagram-fail">
+		<div class="outercontainer"><div class="innercontainer">
+			<span>Not Logged In</span>
+		</div></div>
+	</div>
+	<div class="instagram-hover">
+		<div class="details" data-id="<%= id %>">
 			<div class="outercontainer"><div class="innercontainer">
-				<span>Not Logged In</span>
+				<span class="likes"><%= likes.count %></span> <span class="hearts">&hearts;</span><br>
+				<span class="caption"><%= caption.text %></span>
 			</div></div>
 		</div>
-		<div class="instagram-hover">
-			<div class="details" data-id="<%= item.id %>" data-likes="<%= item.likes %>">
-				<div class="outercontainer"><div class="innercontainer">
-					<span class="likes"><%= item.likes %></span> <span class="hearts">&hearts;</span><br>
-					<span class="caption"><%= item.caption %></span>
-				</div></div>
-			</div>
-		</div>
-		<img src="<%= item.photo %>" data-id="<%= item.id %>" data-caption="<%= item.caption %>" data-likes="<%= item.likes %>">
-		</div>
-<% }); %>
+	</div>
+	<img src="<%= images.standard_resolution.url %>" data-id="<%= id %>">
+
 </script>
+
 
 {% endblock %}
 

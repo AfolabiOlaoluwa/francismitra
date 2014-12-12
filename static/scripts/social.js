@@ -25,6 +25,13 @@ social.InstagramModel = Backbone.Model.extend({
 
 			model.set('likes', clonedModel);
 
+			// var test = model.hasChanged('likes');
+			// console.log(test);
+
+			// model.on('change', function() {
+			// 	console.log('something happened');
+			// });
+
 		}
 
 		var likeMediaFail = function(target) {
@@ -63,6 +70,7 @@ COLLECTIONS
 social.InstagramCollection = Backbone.Collection.extend({
 	model: social.InstagramModel,
 	cache: {},
+	quer: {},
 	url: '/social/instagram',
 	parse: function(response) {
 		// Instagram model collection is returned under data
@@ -78,7 +86,6 @@ social.InstagramCollection = Backbone.Collection.extend({
 
 					// Reset cache to prevent repeated models during pagination
 					self.cache = new social.InstagramCollection(response.content.data);
-					console.log(self.cache);
 
 					var max_id = response.content.pagination.next_max_id;
 					self.query = {'max_id':max_id};
@@ -98,11 +105,40 @@ social.InstagramCollection = Backbone.Collection.extend({
 =================================================
 VIEWS
 ================================================*/
-social.InstagramView = Backbone.View.extend({
-	el: '#social',
-	query: {},
+social.InstagramModelView = Backbone.View.extend({
+	tagName: 'div',
+	className: 'instagram-wrapper',
+	template: _.template($('#instagram-template').html()),
 	events: {
 		'click .details': 'fireModel',
+	},
+    render: function() {
+
+    	this.$el.html(this.template(this.model.toJSON()));
+
+		return this;
+
+    },
+    fireModel: function() {
+
+    	// var target	    = e.currentTarget,
+    		// media_id    = target.getAttribute('data-id');
+
+    	// var model = this.model.findWhere({
+    		// id: media_id
+    	// });
+
+		console.log('clicked');
+
+    	// model.likeMedia(model, target);
+    },
+});
+
+
+
+social.InstagramView = Backbone.View.extend({
+	el: '#social',
+	events: {
 		'click #load-more': 'fetchCollection'
 	},
 	initialize: function() {
@@ -114,40 +150,35 @@ social.InstagramView = Backbone.View.extend({
 	},
 	render: function() {
 
-		var holder 	 = $('#instagram-block'),
-		    template = _.template($('#instagram-template').html());
+		var buffer = document.createDocumentFragment(),
+			holder = $('#instagram-block');
 
-		// Check for null captions for template output
-		for(var i = 0; i < this.collection.cache.models.length; i++) {
-			if(this.collection.cache.models[i].attributes.caption == null) {
+		_.each(this.collection.cache.models, function(thisModel) {
 
-				var cloned = _.clone(this.collection.cache.models[i].get('caption'));
+			if(thisModel.attributes.caption == null) {
+				var cloned = _.clone(thisModel.get('caption'));
 
 				cloned = {};
 				cloned.text = '';
 
-				this.collection.cache.models[i].set('caption', cloned);
-
+				thisModel.set('caption', cloned);
 			}
-		}
 
-		holder.append(template({ collection: this.collection.cache.models }));
+			var modelView = new social.InstagramModelView({model: thisModel});
+			buffer.appendChild(modelView.render().el);
+
+		});
+
+    	holder.append(buffer);
+    	buffer = '';
 
 	},
 	fetchCollection: function() {
 		this.collection.fetchData();
 	},
-	fireModel: function(e) {
-		var target	    = e.currentTarget,
-			media_id    = target.getAttribute('data-id');
-
-		var model = this.collection.findWhere({
-			id: media_id
-		});
-
-		// model.likeMedia(model, target);
-		console.log(model);
-	},
 });
 
-social.instagramview = new social.InstagramView;
+social.instagramView = new social.InstagramView;
+
+
+

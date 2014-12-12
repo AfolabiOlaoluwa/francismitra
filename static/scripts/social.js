@@ -5,54 +5,48 @@ var social = {}
 MODELS
 ================================================*/
 social.InstagramModel = Backbone.Model.extend({
-	likeMedia: function(model, target) {
+	likeMedia: function(view) {
 
-		var model      = model,
-			target     = target,
-			media_like = '/social/media_like';
-
-		var media_id = model.get('id');
+		var model  = view.model,
+		    target = view.$el[0],
+		    url    = '/social/media_like';
 
 		var likeMediaSuccess = function(model, status) {
 
 			var status = status,
 				model  = model;
 
-			// Dealing with Backbone's sync issues on nested fields 
+			// Creating a clone to deal with Backbone's sync issues on nested fields 
 			var clonedModel = _.clone(model.get('likes'));
+			var count = clonedModel.count;
 
-			status == false ? clonedModel.count + 1 : clonedModel.count - 1;
+			status == false ? clonedModel.count = count + 1 : clonedModel.count = count - 1;
 
 			model.set('likes', clonedModel);
-
-			// var test = model.hasChanged('likes');
-			// console.log(test);
-
-			// model.on('change', function() {
-			// 	console.log('something happened');
-			// });
-
+			
 		}
 
 		var likeMediaFail = function(target) {
-			var target = target,
-				hover  = $(target).parent('.instagram-hover'),
-			    notice = hover.siblings('.instagram-fail');
 
-			notice.show().delay(700).fadeOut();
+			var notice = target.children[0];
+			$(notice).show().delay(700).fadeOut();
+
 		}
 
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
-			url: media_like,
-			data: {'id':media_id},
+			url: url,
+			data: {'id':model.attributes.id},
 			success: function(data) {
 				if(data.result == 'success') {
+
 					likeMediaSuccess(model, data.previously_liked);
+
 				} else if (data.result == 'fail') {
-					// console.log(data);
+
 					likeMediaFail(target);
+
 				}
 			},
 			error: function() {
@@ -112,6 +106,11 @@ social.InstagramModelView = Backbone.View.extend({
 	events: {
 		'click .details': 'fireModel',
 	},
+	initialize: function() {
+
+		this.listenTo(this.model, 'change', this.render);
+
+	},
     render: function() {
 
     	this.$el.html(this.template(this.model.toJSON()));
@@ -119,18 +118,13 @@ social.InstagramModelView = Backbone.View.extend({
 		return this;
 
     },
+    test: function() {
+    	console.log('it changed!');
+    },
     fireModel: function() {
 
-    	// var target	    = e.currentTarget,
-    		// media_id    = target.getAttribute('data-id');
+		this.model.likeMedia(this);
 
-    	// var model = this.model.findWhere({
-    		// id: media_id
-    	// });
-
-		console.log('clicked');
-
-    	// model.likeMedia(model, target);
     },
 });
 

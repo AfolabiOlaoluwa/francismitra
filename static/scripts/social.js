@@ -5,46 +5,52 @@ var social = {}
 MODELS
 ================================================*/
 social.InstagramModel = Backbone.Model.extend({
-	likeMedia: function(target) {
-		var target       = target,
-			media_id     = this.attributes.id,
-			media_like   = '/social/media_like';
+	likeMedia: function(view) {
 
-		var likeMediaSuccess = function(target, status) {
-			var $target 	 = $(target),
-				count  		 = $target.find('.likes'),
-				media_count  = $target.data('likes'),
-				status 		 = status;
+		var model  = view.model,
+		    target = view.$el[0],
+		    url    = '/social/media_like';
 
-			status == false ? count.text(media_count+1) : count.text(media_count-1);
+		var likeMediaSuccess = function(model, status) {
 
-			var new_count   = Number(count.text()),
-				media_count = $target.data('likes', new_count);
+			var status = status,
+				model  = model;
+
+			// Creating a clone to deal with Backbone's sync issues on nested fields 
+			var clonedModel = _.clone(model.get('likes'));
+			var count = clonedModel.count;
+
+			status == false ? clonedModel.count = count + 1 : clonedModel.count = count - 1;
+
+			model.set('likes', clonedModel);
+			
 		}
 
 		var likeMediaFail = function(target) {
-			var target = target,
-				hover  = $(target).parent('.instagram-hover'),
-			    notice = hover.siblings('.instagram-fail');
 
-			notice.show().delay(700).fadeOut();
+			var notice = target.children[0];
+			$(notice).show().delay(700).fadeOut();
+
 		}
 
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
-			url: media_like,
-			data: {'id':media_id},
+			url: url,
+			data: {'id':model.attributes.id},
 			success: function(data) {
 				if(data.result == 'success') {
-					likeMediaSuccess(target, data.previously_liked);
+
+					likeMediaSuccess(model, data.previously_liked);
+
 				} else if (data.result == 'fail') {
-					console.log(data);
+
 					likeMediaFail(target);
+
 				}
 			},
 			error: function() {
-				console.log("Failure in BB object social.InstagramModel");
+				console.log('Failure in BB object social.InstagramModel');
 			}
 		});
 
@@ -57,67 +63,26 @@ COLLECTIONS
 ================================================*/
 social.InstagramCollection = Backbone.Collection.extend({
 	model: social.InstagramModel,
+	cache: {},
+	quer: {},
 	url: '/social/instagram',
 	parse: function(response) {
 		// Instagram model collection is returned under data
 		return response.content.data;
-	}
-});
-
-/*
-=================================================
-VIEWS
-================================================*/
-social.InstagramView = Backbone.View.extend({
-	el: '#social',
-	query: {},
-	cache: {},
-	events: {
-		'click .details': 'fireModel',
-		'click #load-more': 'fetchData'
-	},
-	initialize: function() {
-		this.collection = new social.InstagramCollection();
-
-		this.collection.on('sync', this.render, this);
-
-		this.fetchData();
-	},
-	render: function() {
-		var images = {};
-
-		// Parse Instagram collection
-		for(var i = 0; i < this.cache.length; i++) {
-			var photo   = this.cache[i].images.standard_resolution.url,
-				caption = this.cache[i].caption == null ? '' : this.cache[i].caption.text,
-				likes   = this.cache[i].likes.count,
-				id      = this.cache[i].id;
-
-			// Prep images object to dump on template
-			images[i]   = {'photo': photo, 'caption': caption, 'likes': likes, 'id': id};
-		}
-
-		var holder 	 = $('#instagram-block'),
-		    template = _.template($('#instagram-template').html());
-
-		holder.append(template({ collection: images }));
-
 	},
 	fetchData: function() {
 		var self = this;
-		this.collection.fetch({
+		this.fetch({
 			remove: false,
 			data: self.query,
 			success: function(collection, response) {
 				if(response.result == 'success') {
 
-					// Store a reference of the most recently retrieved models
-					self.cache = response.content.data;
+					// Reset cache to prevent repeated models during pagination
+					self.cache = new social.InstagramCollection(response.content.data);
 
 					var max_id = response.content.pagination.next_max_id;
 					self.query = {'max_id':max_id};
-
-					// console.log(response.content.data);
 
 				} else {
 					console.log(response)
@@ -128,16 +93,86 @@ social.InstagramView = Backbone.View.extend({
 			}
 		});
 	},
-	fireModel: function(e) {
-		var target	    = e.currentTarget,
-			media_id    = target.getAttribute('data-id');
+});
 
-		var model = this.collection.findWhere({
-			id: media_id
+/*
+=================================================
+VIEWS
+================================================*/
+social.InstagramModelView = Backbone.View.extend({
+	tagName: 'div',
+	className: 'instagram-wrapper',
+	template: _.template($('#instagram-template').html()),
+	events: {
+		'click .details': 'fireModel',
+	},
+	initialize: function() {
+
+		this.listenTo(this.model, 'change', this.render);
+
+	},
+    render: function() {
+
+    	this.$el.html(this.template(this.model.toJSON()));
+
+		return this;
+
+    },
+    test: function() {
+    	console.log('it changed!');
+    },
+    fireModel: function() {
+
+		this.model.likeMedia(this);
+
+    },
+});
+
+
+
+social.InstagramView = Backbone.View.extend({
+	el: '#social',
+	events: {
+		'click #load-more': 'fetchCollection'
+	},
+	initialize: function() {
+		this.collection = new social.InstagramCollection();
+
+		this.collection.on('sync', this.render, this);
+
+		this.collection.fetchData();
+	},
+	render: function() {
+
+		var buffer = document.createDocumentFragment(),
+			holder = $('#instagram-block');
+
+		_.each(this.collection.cache.models, function(thisModel) {
+
+			if(thisModel.attributes.caption == null) {
+				var cloned = _.clone(thisModel.get('caption'));
+
+				cloned = {};
+				cloned.text = '';
+
+				thisModel.set('caption', cloned);
+			}
+
+			var modelView = new social.InstagramModelView({model: thisModel});
+			buffer.appendChild(modelView.render().el);
+
 		});
 
-		model.likeMedia(target);
+    	holder.append(buffer);
+    	buffer = '';
+
+	},
+	fetchCollection: function() {
+		this.collection.fetchData();
 	},
 });
 
-social.instagramview = new social.InstagramView;
+social.instagramView = new social.InstagramView;
+
+
+

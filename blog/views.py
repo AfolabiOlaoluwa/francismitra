@@ -47,7 +47,7 @@ class TutorialView(LayoutView, ListView):
 
 
 """
-Blog API
+JSON Response to utilize with Backbone
 """
 class ApiView(LayoutView, TemplateView):
 	template_name = 'blog/api.html'

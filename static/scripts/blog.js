@@ -41,7 +41,7 @@ blog.BlogView = Backbone.View.extend({
 
         var holder = $('#blog-view');
         var date = new Date();
-        var monthNames = [ "January", "February", "March", "April", "May", "June",
+        var monthNames = [ "Null", "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December" ];
 
         _.each(this.collection.models, function(model) {

@@ -1,0 +1,40 @@
+{% extends "base/layout.html" %}
+{% block content %}
+
+<section id="blog" class="page blog">
+
+	<div id="blog-view"></div>
+
+	<div id="load-more">Load More</div>
+</section>
+
+<script type="text/template" id="blog-template">
+	
+	<% _.each(collection, function(model) { %>
+
+		<% _.each(model.images, function(image) { %>
+		<img class="blog_images unveil" src="{{ STATIC_URL }}media/loading.gif" data-src="<%= image %>" alt="">
+		<% }); %>
+
+		<div class="row">
+			<span><%= model.created %></span>
+			<% if(model.title != "") { %>
+			| <a href="/blog/<%= model.slug %>"><h2><%= model.title %></h2></a>
+			<% } %>
+		</div>
+	<% }); %>
+
+</script>
+
+{% endblock %}
+
+{% block js %}
+
+	{{ block.super }}
+
+	{% load compress %}
+	{% compress js %}
+	<script src="{{ STATIC_URL }}scripts/blog.js"></script>
+	{% endcompress %}
+
+{% endblock %}

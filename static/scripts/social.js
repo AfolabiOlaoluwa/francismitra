@@ -118,9 +118,6 @@ social.InstagramModelView = Backbone.View.extend({
 		return this;
 
     },
-    test: function() {
-    	console.log('it changed!');
-    },
     fireModel: function() {
 
 		this.model.likeMedia(this);

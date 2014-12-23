@@ -53,14 +53,22 @@ img.blog_images {
 }
 
 .blog {
-	padding-bottom: 50px;
-	> .row {
-		color: @light-gray;
-		.borders();
-	}
+	padding-bottom: 100px;
+	// padding-bottom: 50px;
+	// > .row {
+	// 	color: @light-gray;
+	// 	.borders();
+	// }
 	@media @medium-screen {
 		padding-top: 20px;
 		padding-bottom: 20px;
+	}
+}
+
+#blog-view {
+	> .row {
+		color: @light-gray;
+		.borders();
 	}
 }
 

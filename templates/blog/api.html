@@ -1,4 +1,11 @@
 {% extends "base/layout.html" %}
+
+{% block opengraph %}
+<meta property="og:title" content="Blog"/>
+<meta property="og:image" content="http://francismitra.com{{ latest_post.first.postimages_set.all.first.photo.url }}" />
+<meta property="og:site_name" content="Francis Mitra"/>
+{% endblock %}
+
 {% block content %}
 
 <section id="blog" class="page blog">

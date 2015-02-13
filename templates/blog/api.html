@@ -16,6 +16,12 @@
 		<img class="blog_images unveil" src="{{ STATIC_URL }}media/loading.gif" data-src="<%= image %>" alt="">
 		<% }); %>
 
+		<% if(model.content) { %>
+		<div class="blog__content">
+			<%= model.content %>
+		</div>
+		<% } %>
+
 		<div class="row">
 			<span><%= model.created %></span>
 			<% if(model.title != "") { %>

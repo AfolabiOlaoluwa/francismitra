@@ -52,6 +52,12 @@ JSON Response to utilize with Backbone
 class ApiView(LayoutView, TemplateView):
 	template_name = 'blog/api.html'
 
+	def get_context_data(self, **kwargs):
+		context = super(ApiView, self).get_context_data(**kwargs)
+		context['latest_post'] = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').order_by('-created')[:1]
+		context['page_title'] = 'Blog'
+		return context
+
 class ApiBlogView(JSONResponseMixin, View):
 	def get(self, request, *args, **kwargs):
 

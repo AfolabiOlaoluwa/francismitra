@@ -1,4 +1,14 @@
 {% extends "base/layout.html" %}
+
+{% block opengraph %}
+<meta property="og:title" content="{{ posts.title }}"/>
+<meta property="og:image" content="http://francismitra.com{{ posts.postimages_set.all.first.photo.url }}" />
+<meta property="og:site_name" content="Francis Mitra"/>
+{% if posts.content %}
+<meta property="og:description" content="{{ posts.content|striptags }}" />
+{% endif %}
+{% endblock %}
+
 {% block content %}
 
 <section class="page single">

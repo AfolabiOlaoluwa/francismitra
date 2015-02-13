@@ -6,6 +6,8 @@
 		<meta name="keywords" content="conceptual photography, street photography, web development, new york web developer, new york photographer">
 		<meta name="description" content="Creative and technical ventures of a traveling photographer and web developer.">
 		<title>Francis Mitra{% if page_title %} | {{ page_title }}{% endif %}</title>
+		{% block opengraph %}
+		{% endblock %}
 		<link rel="icon" href="{{ STATIC_URL }}media/favicon.png" type="image/png">
 		{% load compress %}
 		{% compress css %}

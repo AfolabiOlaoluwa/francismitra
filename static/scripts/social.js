@@ -147,12 +147,26 @@ social.InstagramView = Backbone.View.extend({
 		_.each(this.collection.cache.models, function(thisModel) {
 
 			if(thisModel.attributes.caption == null) {
+				
 				var cloned = _.clone(thisModel.get('caption'));
 
 				cloned = {};
 				cloned.text = '';
 
 				thisModel.set('caption', cloned);
+
+			} else {
+
+				// trim excess captions that wrap greater than 4 lines
+				var caption     = thisModel.attributes.caption.text.length,
+				    max_caption = 120;
+
+				if(caption >= max_caption) {
+					trimmed = thisModel.attributes.caption.text.substring(0, max_caption-10) + "...";
+
+					thisModel.attributes.caption.text = trimmed;
+				}
+
 			}
 
 			var modelView = new social.InstagramModelView({model: thisModel});

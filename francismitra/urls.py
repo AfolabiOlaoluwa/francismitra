@@ -6,7 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	# url(r'^$', include('portfolio.urls', namespace='portfolio')),
+    # url(r'^$', include('portfolio.urls', namespace='portfolio')),
     url(r'^blog/', include('blog.urls', namespace='blog')),
     url(r'^social/', include('social.urls', namespace='social')),
     # url(r'^portfolio/', include('portfolio.urls', namespace='portfolio')),

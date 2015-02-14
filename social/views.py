@@ -63,6 +63,7 @@ class SocialView(LayoutView, TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(SocialView, self).get_context_data(**kwargs)
 		context['page_title'] = 'Social'
+		context['page_description'] = 'Mobile photography from around the world by digital creative Francis Mitra'
 
 		# Check if code parameter is available and retrieve token
 		if self.request.GET.get('code'):

@@ -38,9 +38,16 @@ class CategoryView(LayoutView, DetailView):
 	template_name = 'portfolio/category.html'
 	model = Categories
 
+	meta_desc =  {}
+	meta_desc['Singles'] = "A collection of conceptual photographs by New York creative and developer Francis Mitra."
+	meta_desc['Life'] = "A private glance at New York 20-somethings by Francis Mitra."
+	meta_desc['People'] = "Portraiture by New York photographer Francis Mitra."
+	meta_desc['Places'] = "Street photography and documentary work by traveling photographer Francis Mitra."
+
 	def get_context_data(self, **kwargs):
 		context = super(CategoryView, self).get_context_data(**kwargs)
 		context['page_title'] = 'Portfolio | %s' % (self.get_object().title)
+		context['page_description'] = self.meta_desc[self.get_object().title]
 		return context
 
 class ResumeView(LayoutView, TemplateView):
@@ -49,6 +56,7 @@ class ResumeView(LayoutView, TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(ResumeView, self).get_context_data(**kwargs)
 		context['page_title'] = 'Resume'
+		context['page_description'] = 'Resume of New York based digital creative, Francis Mitra'
 		return context
 
 class InfoView(LayoutView, TemplateView):
@@ -57,5 +65,6 @@ class InfoView(LayoutView, TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(InfoView, self).get_context_data(**kwargs)
 		context['page_title'] = 'Info'
+		context['page_description'] = 'Street photographer and web developer. I often find myself juggling creative and technical ventures'
 		return context
 

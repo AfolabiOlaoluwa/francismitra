@@ -3,14 +3,22 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="keywords" content="conceptual photography, street photography, web development, new york web developer, new york photographer">
+		<meta name="keywords" content="conceptual photography, digital creative, travel photography, street photography, web development, new york web developer, new york photographer">
+		{% if page_description %}
+		<meta name="description" content="{{ page_description }}">
+		{% else %}
 		<meta name="description" content="Creative and technical ventures of a traveling photographer and web developer.">
+		{% endif %}
 		<title>Francis Mitra{% if page_title %} | {{ page_title }}{% endif %}</title>
 		{% block opengraph %}
 		{% if page_title %}<meta property="og:title" content="{{ page_title }}"/>{% endif %}
 		<meta property="og:image" content="http://francismitra.com/static/media/logo.jpg" />
 		<meta property="og:site_name" content="Francis Mitra"/>
+		{% if page_description %}
+		<meta property="og:description" content="{{ page_description }}"/>
+		{% else %}
 		<meta property="og:description" content="Creative and technical ventures of a traveling photographer and web developer." />
+		{% endif %}
 		{% endblock %}
 		<link rel="icon" href="{{ STATIC_URL }}media/favicon.png" type="image/png">
 		{% load compress %}

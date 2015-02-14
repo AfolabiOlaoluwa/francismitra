@@ -40,7 +40,10 @@ portfolio.DefaultView = Backbone.View.extend({
             } );
     },
     closeMenu: function() {
-        $('.menu-toggle').trigger('click');
+        // For mobile test... jQuery's trigger only works on onClick actions
+        // console.log($('.menu-toggle')[0]);
+        $('.menu-toggle')[0].click();
+        // $('.menu-toggle').trigger('click');
     },
     removeMobileStyles: function() {
         $('.mobile-shade').hide();

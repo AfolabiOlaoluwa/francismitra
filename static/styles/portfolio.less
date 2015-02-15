@@ -3,67 +3,67 @@
 PORTFOLIO
 ================================================*/
 .page {
-	width: 85%;
-	padding: 10px 20px;
-	z-index: 2;
-	position: relative;
-	.clearfix;
-	img {
-		width: 100%;
-		max-width: 100%;
-	}
-	@media (max-width: 1200px) {
-		// keep centered with pushed nav
-		margin-left: 20px; 
-		width: 78%;
-	}
-	@media (max-width: 900px) {
-		width: 75%;
-	}
-	// @media (max-width: 1050px) {
-		// width: 80%;
-	// }
-	// @media (max-width: 920px) {
-	// 	width: 77%;
-	// }
-	@media @medium-screen {
-		width: 100%;
-		margin-left: 0;
-		.basepadding;
-	}
+    width: 85%;
+    padding: 10px 20px;
+    z-index: 2;
+    position: relative;
+    .clearfix;
+    img {
+        width: 100%;
+        max-width: 100%;
+    }
+    @media (max-width: 1200px) {
+        // keep centered with pushed nav
+        margin-left: 20px; 
+        width: 78%;
+    }
+    @media (max-width: 900px) {
+        width: 75%;
+    }
+    // @media (max-width: 1050px) {
+        // width: 80%;
+    // }
+    // @media (max-width: 920px) {
+    //  width: 77%;
+    // }
+    @media @medium-screen {
+        width: 100%;
+        margin-left: 0;
+        .basepadding;
+    }
 }
 
 .portfolio {
-	white-space: nowrap;
-	position: absolute;
-	// top: @top-position;
-	left: 0;
-	padding-right: 300px;
-	height: @portfolio-height;
-	img {
-		height: 100%;
-		margin-right: 15px;
-	}
-	> .row {
-		display: none;
-		@media @medium-screen {
-			display: block;
-			.borders();
-		}
-	}
-	@media @medium-screen {
-		top: 20px;
-		position: relative;
-		.basepadding;
-		// overide the desktop height checks
-		height: auto !important; 
-		white-space: normal;
-		width: 100%;
-		img {
-			margin-right: 0;
-		}
-	}
-	.portfolio_responses();
+    white-space: nowrap;
+    position: absolute;
+    // top: @top-position;
+    left: 0;
+    padding-right: 300px;
+    height: @portfolio-height;
+    img {
+        height: 100%;
+        margin-right: 15px;
+    }
+    > .row {
+        display: none;
+        @media @medium-screen {
+            display: block;
+            .borders();
+        }
+    }
+    @media @medium-screen {
+        top: 20px;
+        position: relative;
+        .basepadding;
+        // overide the desktop height checks
+        height: auto !important; 
+        white-space: normal;
+        width: 100%;
+        img {
+            margin-right: 0;
+        }
+    }
+    .portfolio_responses();
 }
 
 
@@ -72,110 +72,110 @@ PORTFOLIO
 RESUME
 ================================================*/
 .resume {
-	padding-bottom: 100px;
-	section {
-		margin-bottom: 20px;
-		> span {
-			display: block;
-			clear: both;
-		}
-		.pull {
-			margin-bottom: 0;
-		}
-	}
-	h2 {
-		color: @red;
-		// color: @white;
-		display: inline-block;
-		text-transform: uppercase;
-		font-size: 20px;
-		// background-color: @red;
-		// padding: 0 5px;
-		// fix awkward spacing for bebas font
-		margin: 3px 0 20px 0; 
-		font-family: bebasregular;
-	}
-	@media @medium-screen {
-		padding-top: 20px;
-		padding-bottom: 50px;
-		.col-3, .col-7 {
-			float: none;
-			width: 100%;
-		}
-		.col-7 {
-			padding-left: 0 !important;
-		}
-		.col-3 {
-			text-align: left !important;
-		}
-	}
+    padding-bottom: 100px;
+    section {
+        margin-bottom: 20px;
+        > span {
+            display: block;
+            clear: both;
+        }
+        .pull {
+            margin-bottom: 0;
+        }
+    }
+    h2 {
+        color: @red;
+        // color: @white;
+        display: inline-block;
+        text-transform: uppercase;
+        font-size: 20px;
+        // background-color: @red;
+        // padding: 0 5px;
+        // fix awkward spacing for bebas font
+        margin: 3px 0 20px 0; 
+        font-family: bebasregular;
+    }
+    @media @medium-screen {
+        padding-top: 20px;
+        padding-bottom: 50px;
+        .col-3, .col-7 {
+            float: none;
+            width: 100%;
+        }
+        .col-7 {
+            padding-left: 0 !important;
+        }
+        .col-3 {
+            text-align: left !important;
+        }
+    }
 }
 
 .degree {
-	font-family: 'letter_gothic_medium', arial, sans-serif;
-	font-size: 30px;
+    font-family: 'letter_gothic_medium', arial, sans-serif;
+    font-size: 30px;
 }
 
 .experience-block {
-	margin-bottom: 20px;
-	text-align: justify;
-	ul {
-		margin: 10px 0 0 0;
-		padding-left: 20px;
-		li {
-			margin: 0;
-			color: lighten(@light-gray, 30%);
-			span {
-				color: @black;
-			}
-		}
-	}
-	// @media (max-width:850px) {
-		// > div h3, 
-		// > div .date {
-		// 	float: left;
-		// 	clear: both;
-		// }
-	// }
-	h3 {
-		font-family: roboto_slabregular;
-		// float: left;
-	}
-	.date {
-		// float: right;
-		text-transform: lowercase;
-	}
-	// This is here in case you decide to float the date later
-	.expereince-block__header {
-		width: 100%;
-		.clearfix;
-	}
+    margin-bottom: 20px;
+    text-align: justify;
+    ul {
+        margin: 10px 0 0 0;
+        padding-left: 20px;
+        li {
+            margin: 0;
+            color: lighten(@light-gray, 30%);
+            span {
+                color: @black;
+            }
+        }
+    }
+    // @media (max-width:850px) {
+        // > div h3, 
+        // > div .date {
+        //  float: left;
+        //  clear: both;
+        // }
+    // }
+    h3 {
+        font-family: roboto_slabregular;
+        // float: left;
+    }
+    .date {
+        // float: right;
+        text-transform: lowercase;
+    }
+    // This is here in case you decide to float the date later
+    .expereince-block__header {
+        width: 100%;
+        .clearfix;
+    }
 }
 
 .experience-block__context {
-	padding: 10px;
-	// background-color: lighten(@gray, 30%);
-	background-color: lighten(@light-gray, 40%);
-	// background-color: #f7f7f7;
-	margin-top: 10px;
-	color: @light-gray;
+    padding: 10px;
+    // background-color: lighten(@gray, 30%);
+    background-color: lighten(@light-gray, 40%);
+    // background-color: #f7f7f7;
+    margin-top: 10px;
+    color: @light-gray;
 }
 
 .skill-blocks {
-	height: 35px;
-	line-height: 35px;
-	border-radius: 10px;
-	display: inline-block;
-	padding: 0 10px;
-	color: @red;
-	background-color: lighten(@light-gray, 40%);
-	text-transform: uppercase;
-	margin: 0 0 5px 5px;
-	font-family: 'ralewaylight', arial, sans-serif;
-	&:first-child {
-		margin-left: 0;
-	}
-	@media @medium-screen {
-		margin: 0 5px 5px 0;
-	}
+    height: 35px;
+    line-height: 35px;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 0 10px;
+    color: @red;
+    background-color: lighten(@light-gray, 40%);
+    text-transform: uppercase;
+    margin: 0 0 5px 5px;
+    font-family: 'ralewaylight', arial, sans-serif;
+    &:first-child {
+        margin-left: 0;
+    }
+    @media @medium-screen {
+        margin: 0 5px 5px 0;
+    }
 }

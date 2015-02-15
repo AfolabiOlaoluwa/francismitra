@@ -3,131 +3,131 @@
 SOCIAL
 ================================================*/
 a.instagram-link {
-	width: 100%;
-	display: block;
-	background-color: @red;
-	color: @white;
-	padding: 20px;
-	text-align: center;
-	text-transform: uppercase;
-	@media @medium-screen {
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 3;
-	}
+    width: 100%;
+    display: block;
+    background-color: @red;
+    color: @white;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    @media @medium-screen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+    }
 }
 
 #instagram-block {
-	.clearfix;
+    .clearfix;
 }
 
 #load-more {
-	width: 100%;
-	display: block;
-	background-color: @red;
-	color: @white;
-	padding: 20px;
-	text-align: center;
-	text-transform: uppercase;
-	margin-top: 20px;
-	border-radius: 30px;
-	cursor: pointer;
+    width: 100%;
+    display: block;
+    background-color: @red;
+    color: @white;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 20px;
+    border-radius: 30px;
+    cursor: pointer;
 }
 
 .social {
-	padding-bottom: 100px;
-	@media @medium-screen {
-		padding-top: 10px;
-	}
+    padding-bottom: 100px;
+    @media @medium-screen {
+        padding-top: 10px;
+    }
 }
 
 .social-push {
-	@media @medium-screen {
-		padding-top: 70px;
-	}
+    @media @medium-screen {
+        padding-top: 70px;
+    }
 }
 
 .instagram-wrapper {
-	width: 50%;
-	float: left;
-	height: auto;
-	position: relative;
-	.instagram-fail {
-		display: none;
-		background-color: fadeout(@red, 15%);
-		z-index: 20;
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		font-family: bebasregular;
-		text-align: center;
-		text-transform: uppercase;
-		color: @white;
-		font-size: 18px;
-		letter-spacing: 2px;
-		cursor: pointer;
-	}
-	.instagram-hover {
-		display: none;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: fadeout(@black, 30%);
-		cursor: pointer;;
-		.details {
-			font-size: 40px;
-			color: @white;
-			text-align: center;
-			width: 100%;
-			height: 100%;
-			padding: 15px;
-			span.caption {
-				font-size: 22px;
-			}
-			span.hearts {
-				font-size: 45px;
-			}
-		}
-	}
-	img {
-		display: block;
-		height: auto;
-	}
-	&:hover .instagram-hover {
-		display: block;
-	}
-	@media @large-screen {
-		width: 100%;
-		margin-bottom: 10px;
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-	@media @medium-screen {
-		.instagram-hover {
-			height: 20%;
-			top: auto;
-			bottom: 0;
-			display: block;
-		}
-		span.caption {
-			display: none;
-		}
-	}
-	@media @small-screen {
-		.instagram-hover {
-			.details {
-				padding: 10px 10px 8px 10px;
-				font-size: 25px;
-				span.hearts {
-					font-size: 30px;
-				}
-			}
-		}
-	}
+    width: 50%;
+    float: left;
+    height: auto;
+    position: relative;
+    .instagram-fail {
+        display: none;
+        background-color: fadeout(@red, 15%);
+        z-index: 20;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        font-family: bebasregular;
+        text-align: center;
+        text-transform: uppercase;
+        color: @white;
+        font-size: 18px;
+        letter-spacing: 2px;
+        cursor: pointer;
+    }
+    .instagram-hover {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: fadeout(@black, 30%);
+        cursor: pointer;;
+        .details {
+            font-size: 40px;
+            color: @white;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            span.caption {
+                font-size: 22px;
+            }
+            span.hearts {
+                font-size: 45px;
+            }
+        }
+    }
+    img {
+        display: block;
+        height: auto;
+    }
+    &:hover .instagram-hover {
+        display: block;
+    }
+    @media @large-screen {
+        width: 100%;
+        margin-bottom: 10px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    @media @medium-screen {
+        .instagram-hover {
+            height: 20%;
+            top: auto;
+            bottom: 0;
+            display: block;
+        }
+        span.caption {
+            display: none;
+        }
+    }
+    @media @small-screen {
+        .instagram-hover {
+            .details {
+                padding: 10px 10px 8px 10px;
+                font-size: 25px;
+                span.hearts {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
 }

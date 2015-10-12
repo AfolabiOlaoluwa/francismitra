@@ -4,6 +4,7 @@ class Posts(models.Model):
     title           = models.CharField(max_length=250, blank=True, null=True)
     content         = models.TextField(blank=True, null=True)
     created         = models.DateTimeField(auto_now_add=True)
+    live            = models.BooleanField(default=True, blank=True)
     CATEGORY_LIST   = (('TU', 'Tutorials'),('DE','Default'))
     category        = models.CharField(max_length=2, choices=CATEGORY_LIST)
     slug            = models.SlugField()

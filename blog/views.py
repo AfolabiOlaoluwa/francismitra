@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core import serializers
 from blog.models import Posts,PostImages
 from portfolio.views import LayoutView
-from social.views import JSONResponseMixin
+from django.http import JsonResponse
 
 class BlogView(LayoutView, ListView):
     template_name = 'blog/blog.html'
@@ -58,7 +58,7 @@ class ApiView(LayoutView, TemplateView):
         context['page_title'] = 'Blog'
         return context
 
-class ApiBlogView(JSONResponseMixin, View):
+class ApiBlogView(View):
     def get(self, request, *args, **kwargs):
 
         posts_query = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').order_by('-created')
@@ -90,7 +90,8 @@ class ApiBlogView(JSONResponseMixin, View):
             posts['images'] = post_images
             all_posts.append(posts)
 
-        return self.render_to_response(all_posts)
+        return JsonResponse(all_posts, safe=False)
+
 
 
 

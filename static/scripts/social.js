@@ -44,7 +44,7 @@ social.InstagramModel = Backbone.Model.extend({
                     likeMediaSuccess(model, data.previously_liked);
 
                 } else if (data.result == 'fail') {
-
+                    console.log(data);
                     likeMediaFail(target);
 
                 }
@@ -103,9 +103,12 @@ social.InstagramModelView = Backbone.View.extend({
     tagName: 'div',
     className: 'instagram-wrapper',
     template: _.template($('#instagram-template').html()),
-    events: {
-        'click .details': 'fireModel',
-    },
+    // Instagram removed the ability for consumer applications
+    // to issue Likes and Comments post requests. This feature
+    // is limited to enterprise applications only
+    // events: {
+        // 'click .details': 'fireModel',
+    // },
     initialize: function() {
 
         this.listenTo(this.model, 'change', this.render);

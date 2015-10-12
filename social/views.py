@@ -69,6 +69,10 @@ class SocialView(LayoutView, TemplateView):
 
 """
 Allow authenticated users to 'like' personal Instagram feed
+
+NOTE: October 12, 2015
+This endpoint is no longer in use. Instagram limited requests to the managing likes and comments
+to enterprise application on September 2015
 """
 class MediaLike(View):
     def get(self, request, *args, **kwargs):

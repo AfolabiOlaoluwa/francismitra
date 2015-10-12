@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, View
 from django import http
 from social.models import PersonalInstagram, AuthenticateInstagram
-from social.config import INSTAGRAM_CONFIG
+from francismitra.settings import INSTAGRAM_CONFIG
 from portfolio.views import LayoutView
 from django.http import JsonResponse
 

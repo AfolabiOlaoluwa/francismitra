@@ -18,6 +18,17 @@ a.instagram-link {
     }
 }
 
+a.link-pair {
+    width: 50%;
+    float: left;
+    &:nth-child(2n) {
+        background-color: lighten(@red, 5%);
+        @media @medium-screen {
+            left: 50%;
+        }
+    }
+}
+
 #instagram-block {
     .clearfix;
 }

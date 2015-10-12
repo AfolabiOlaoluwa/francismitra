@@ -7,7 +7,7 @@ from blog.models import Posts,PostImages
 from portfolio.views import LayoutView
 from django.http import JsonResponse
 
-# TESTING FOR CHANGE
+# TESTING FOR CHANGE 2
 
 class BlogView(LayoutView, ListView):
     template_name = 'blog/blog.html'

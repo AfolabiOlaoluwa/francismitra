@@ -6,7 +6,6 @@ venv/
 media/
 static/CACHE
 static/scripts/libs
-migrations/
 social/config.py
 francismitra/settings.py
 

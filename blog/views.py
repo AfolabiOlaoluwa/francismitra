@@ -7,6 +7,8 @@ from blog.models import Posts,PostImages
 from portfolio.views import LayoutView
 from django.http import JsonResponse
 
+# TESTING FOR CHANGE
+
 class BlogView(LayoutView, ListView):
     template_name = 'blog/blog.html'
     queryset = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').order_by('-created')

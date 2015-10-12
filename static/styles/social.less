@@ -10,6 +10,9 @@ a.instagram-link {
     padding: 20px;
     text-align: center;
     text-transform: uppercase;
+    &:hover {
+        background-color: darken(@red, 10%);
+    }
     @media @medium-screen {
         position: absolute;
         top: 0;
@@ -23,6 +26,9 @@ a.link-pair {
     float: left;
     &:nth-child(2n) {
         background-color: lighten(@red, 5%);
+        &:hover {
+            background-color: darken(@red, 10%);
+        }
         @media @medium-screen {
             left: 50%;
         }
@@ -44,6 +50,9 @@ a.link-pair {
     margin-top: 20px;
     border-radius: 30px;
     cursor: pointer;
+    &:hover {
+        background-color: darken(@red, 10%);
+    }
 }
 
 .social {

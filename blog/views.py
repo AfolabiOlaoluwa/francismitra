@@ -9,7 +9,7 @@ from django.http import JsonResponse
 
 class BlogView(LayoutView, ListView):
     template_name = 'blog/blog.html'
-    queryset = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').order_by('-created')
+    queryset = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').exclude(live=0).order_by('-created')
     context_object_name = 'blog_posts'
 
     def get_context_data(self, **kwargs):
@@ -37,7 +37,7 @@ class SingleView(LayoutView, DetailView):
 
 class TutorialView(LayoutView, ListView):
     template_name = 'blog/tutorials.html'
-    queryset = Posts.objects.prefetch_related('postimages_set').exclude(category='DE').order_by('-created')
+    queryset = Posts.objects.prefetch_related('postimages_set').exclude(category='DE').exclude(live=0).order_by('-created')
     context_object_name = 'tutorial_posts'
 
     def get_context_data(self, **kwargs):
@@ -54,14 +54,14 @@ class ApiView(LayoutView, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ApiView, self).get_context_data(**kwargs)
-        context['latest_post'] = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').order_by('-created')[:1]
+        context['latest_post'] = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').exclude(live=0).order_by('-created')[:1]
         context['page_title'] = 'Blog'
         return context
 
 class ApiBlogView(View):
     def get(self, request, *args, **kwargs):
 
-        posts_query = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').order_by('-created')
+        posts_query = Posts.objects.prefetch_related('postimages_set').exclude(category='TU').exclude(live=0).order_by('-created')
         paginator   = Paginator(posts_query, 6)
         page        = request.GET.get('page')
 
